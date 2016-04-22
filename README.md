@@ -16,3 +16,16 @@ The moderator will make sure the code won't break the project.
 + `knex migrate:latest`
 + `knex migrate:latest --env test`
 +  Test command: mocha
+
+### Kyle's Git Workflow
+
+If you want have made changes:
++ `git add .`
++ `git commit -m ""`
++ `git pull upstream master`
+
+Handle any merge conflicts on your own side computer
+
++ `git push origin master`
+
+Finally, initiate a pull request on GitHub
