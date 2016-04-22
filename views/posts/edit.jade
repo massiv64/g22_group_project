@@ -8,8 +8,4 @@ block content
     div
       input(type="text" name="post[body]" value="#{post.body}")
     div
-      each tag in tags
-        input(type="checkbox" name="tags[ids]" value="#{tag.id}" checked=(tag.isChecked ? "checked" : undefined))
-        label(for="#{tag.name}")= tag.name
-    div
       input(type="submit" value="Edit this post")
