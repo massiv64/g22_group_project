@@ -8,9 +8,6 @@ block content
     .panel.panel-default.panel-info
       .panel-heading #{post.title}
       .panel-body #{post.body}
-        ul
-          each tag in post.tags
-            li= tag.name
       a(href="/posts/#{post.id}/comments") See all the comments for this post
       br
       a(href="/users/#{user.id}/posts/#{post.id}/edit") Edit this post

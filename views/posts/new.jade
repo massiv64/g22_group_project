@@ -8,8 +8,5 @@ block content
       input(type="text" name="post[title]")
     div
       input(type="text" name="post[body]")
-    each tag in tags
-      input(type="checkbox" name="tags[ids]" value="#{tag.id}")
-      label(for="#{tag.name}")= tag.name
     div
       input(type="submit" value="Add this post")
