@@ -42,7 +42,7 @@ router.get('/:id', (req,res) => {
 
 
 router.get('/:id/edit', (req,res) => {
-  knex.select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.username").from('posts').where({"posts.id": req.params.id}).join("users", "posts.user_id","users.id").first().then((post) => {
+  knex.select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias").from('posts').where({"posts.id": req.params.id}).join("users", "posts.user_id","users.id").first().then((post) => {
     knex('post_tags').where({post_id: post.post_id}).pluck("tag_id").then((ids) => {
       knex('tags').then((tags) => {
       ids.map(Number).map(v => _.find(tags, {id:v})).map(v => Object.assign(v, {isChecked: true}))
