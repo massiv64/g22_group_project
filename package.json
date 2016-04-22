@@ -1,7 +1,6 @@
 {
-  "name": "reddit_clone_knex",
+  "name": "unit2_stack_overflow",
   "version": "1.0.0",
-  "description": "For this assignment you will need to combine your knowledge of express, SQL and Knex to build a Reddit clone where users can create posts and comment on those posts.",
   "main": "app.js",
   "directories": {
     "test": "test"
@@ -20,7 +19,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   },
   "scripts": {
     "test": "mocha"
