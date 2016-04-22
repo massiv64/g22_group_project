@@ -19,7 +19,7 @@ The moderator will make sure the code won't break the project.
 
 ### Kyle's Git Workflow
 
-If you want have made changes:
+If you have made changes:
 + `git add .`
 + `git commit -m ""`
 + `git pull upstream master`
