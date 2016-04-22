@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  h1 Hey #{user.username} - what are you writing about?
+  h1 Hey #{user.alias} - what are you writing about?
   form(action="/users/#{user.id}/posts", method="POST")
     div
       input(type="text" name="post[title]")
