@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
-  h1 See #{user.username}'s posts
-  a(href="/users/#{user.id}/posts/new") Add a new post for #{user.username}
+  h1 See #{user.alias}'s posts
+  a(href="/users/#{user.id}/posts/new") Add a new post for #{user.alias}
 
   each post in posts
     .panel.panel-default.panel-info
