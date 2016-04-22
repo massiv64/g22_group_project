@@ -8,6 +8,11 @@ Once you are ready to push onto github, push your commit onto your own git repos
 When your code is accepted, the moderator will merge your code into the master branch.
 The moderator will make sure the code won't break the project.
 
-
-
-
+### Testing / setup Instructions:
++ git clone and npm install
++ `createdb stack_app`
++ `createdb stack_app-test`
++ `knex migrate:latest`
++ `knex migrate:latest`
++ `knex migrate:latest --env test`
++  Test command: mocha

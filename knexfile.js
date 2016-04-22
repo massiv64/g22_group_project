@@ -11,9 +11,20 @@ module.exports = {
       max: 10
     },
     migrations: {
-        directory: './db/migrations'
+        directory: './migrations'
     }
   },
+  test: {
+   client: 'postgresql',
+   connection: {
+     database: 'stack_app-test'
+   },
+     pool: {
+     min: 1,
+     max: 5
+   },
+   debug:true
+ },
 
   production: {
     client: 'postgresql',
