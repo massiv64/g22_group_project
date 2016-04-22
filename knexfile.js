@@ -4,12 +4,14 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/stack_app',
-    debug: true,
-    pool: {
-      min: 2,
-      max: 10
+    connection: {
+      database: 'stack_app'
     },
+    pool: {
+      min: 1,
+      max: 1
+    },
+    debug: true,
     migrations: {
         directory: './migrations'
     }
@@ -21,7 +23,7 @@ module.exports = {
    },
      pool: {
      min: 1,
-     max: 5
+     max: 2
    },
    debug:true
  },
