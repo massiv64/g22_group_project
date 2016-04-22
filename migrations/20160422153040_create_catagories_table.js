@@ -1,9 +1,8 @@
-
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('categories', function(table){
-    table.increments();
-    table.string('language')
-  })
+  return knex.schema.createTable('categories', t => {
+    t.increments();
+    t.text('technology');
+  });  
 };
 
 exports.down = function(knex, Promise) {
