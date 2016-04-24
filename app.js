@@ -2,14 +2,19 @@ const express = require("express")
 const app = express()
 const methodOverride = require("method-override")
 const morgan = require("morgan")
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
 const routes = require("./routes")
+const flash = require('connect-flash')
+const passport = require('passport')
+
 
 app.set("view engine", "jade");
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("tiny"))
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', routes.main);
 app.use('/users', routes.users);
