@@ -1,0 +1,30 @@
+.container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tile {
+  border-top: 2px;
+  border-color: gray;
+  border-style: solid;
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 75vw;
+}
+
+.menu {
+  position: fixed;
+  right: 0vw;
+  font-size: 20px;
+  width: 20vw;
+  padding: 10px;
+  background-color: rgba(100,100,100,0.5);
+
+}
+a {
+  color: #005999;
+}
+
+a:hover {
+  color: #3af;
+}
