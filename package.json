@@ -6,14 +6,27 @@
     "test": "test"
   },
   "dependencies": {
+    "bcrypt": "^0.8.6",
+    "bluebird": "^3.3.5",
     "body-parser": "^1.15.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "cookie-session": "^2.0.0-alpha.1",
+    "dotenv": "^2.0.0",
     "express": "^4.13.4",
+    "express-flash": "0.0.2",
+    "flash": "^1.1.0",
     "jade": "^1.11.0",
     "knex": "^0.10.0",
     "locus": "^1.2.0",
     "lodash": "^4.8.2",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-linkedin-oauth2": "^1.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^4.5.2"
   },
   "devDependencies": {
