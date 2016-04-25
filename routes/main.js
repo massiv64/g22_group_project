@@ -4,7 +4,7 @@ const knex = require("../db/knex")
 const Promise = require("bluebird")
 
 router.get("/", (req,res) => {
-  res.redirect("/users");
+  res.render('main/frontpage');
 });
 
 router.get('/posts', (req,res) => {
