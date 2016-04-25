@@ -1,29 +1,26 @@
-const express = require("express")
+const express = require('express');
+const passport = require('passport');
+const flash    = require('connect-flash');
+const session  = require('cookie-session');
+const knex = require('../db/knex');
+const bcrypt = require('bcrypt');
+const authHelpers = require('../helpers/authHelpers');
+const passwordHelpers = require('../helpers/passwordHelpers');
+const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
-const knex = require("../db/knex")
-const passport = require('passport')
-const LocalStrategy = require('passport-local').LocalStrategy
-const bcrypt = require('bcrypt')
-const SALT_WORK_FACTOR = 10
 
+router.use(authHelpers.currentUser);
+router.use(authHelpers.ensureAuthenticated)
 
+router.get('/', function(req, res, next) {
+  knex('users').then((users) => {
+    res.render('users/index', {users})
+  })
+});
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/users/login');
-}); 
-
-//router.get('/', helpers.ensureAuthenticated, (req,res) => {
-//  knex('users').then((users) =>{
-//    res.render("users/index", {users})
-//  }).catch((err) =>{
-//    res.render("error", {err})
-//  });
-//});
-//
-//router.get('/new',helpers.preventLoginSignup, (req,res) => {
-//  res.render("users/new")
-//})
+router.get('/profile', function(req, res, next){
+	res.render('users/profile', {user:req.user});
+});
 
 router.get('/:id', (req,res) => {
   knex('users').where({id: req.params.id}).first().then((user) =>{
