@@ -37,7 +37,7 @@ passport.deserializeUer(function(user, done) {
 })
 
 
-router.get('/', (req,res) => {
+router.get('/', helpers.ensureAuthenticated, (req,res) => {
   knex('users').then((users) =>{
     res.render("users/index", {users})
   }).catch((err) =>{
@@ -45,7 +45,7 @@ router.get('/', (req,res) => {
   });
 });
 
-router.get('/new', (req,res) => {
+router.get('/new',helpers.preventLoginSignup, (req,res) => {
   res.render("users/new")
 })
 
@@ -66,6 +66,19 @@ router.get('/:id/edit', (req,res) => {
 });
 
 router.post('/', (req,res) => {
+  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+    bcrypt.hash(req.body.user.password, salt (err, hash) => {
+      knex('users').insert({
+        email: req.body.user.email,
+        password: hash
+      }).then(() => {
+        res.redirect('/users')
+      }).catch(err => {
+        res.render('new')
+      });
+    });
+  });
+
   knex('users').insert(req.body.user).then(() =>{
     res.redirect('/users')
   }).catch((err) =>{
