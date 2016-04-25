@@ -12,9 +12,17 @@ block content
       .form-group
         label Password
         input.form-control(type='password', name='user[password]' autocomplete="off")
-      button.btn.btn-warning.btn-lg(type='submit') Login
+      button.btn.btn-warning.btn-md(type='submit') Login
   br
-  h3 Sign up
-  a(href="/signup") Click here to sign up
-  h3 Or, login with Google!
-  a(href="/auth/linkedin") Login via Linkedin
+  #container.signup
+    h3 Sign up 
+    a(href="/signup") 
+      button(class="btn btn-primary") Click here to sign up
+    h3 Or, login with one of the followings:
+    div
+      a(href="/auth/linkedin") 
+        i(class="fa fa-linkedin fa-2x linkedin" aria-hidden="true") &nbsp; LinkedIn 
+      br
+      a(href="/auth/google")
+        i(class="fa fa-google fa-2x google" aria-hidden="true") &nbsp; Google
+
