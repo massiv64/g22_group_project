@@ -31,11 +31,22 @@ passport.serializeUser(function(user, done){
   done(null, user.id)
 });
 
-passport.deserializeUer(function(user, done) { 
-  
+passport.deserializeUser(function(user, done) {
+  knex('users').where('id', id).first().then(user => {
+    done(null, user)
+  }).catch(err, false);
+});
 
-})
+router.get('/login', function(req, res){
+  res.render('login', {
+    message: loginMessage
+  });
+});
 
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/users/login');
+});
 
 router.get('/', helpers.ensureAuthenticated, (req,res) => {
   knex('users').then((users) =>{
@@ -67,7 +78,7 @@ router.get('/:id/edit', (req,res) => {
 
 router.post('/', (req,res) => {
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-    bcrypt.hash(req.body.user.password, salt (err, hash) => {
+    bcrypt.hash(req.body.user.password, salt, (err, hash) => {
       knex('users').insert({
         email: req.body.user.email,
         password: hash
