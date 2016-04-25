@@ -5,8 +5,8 @@ var Page = React.createClass({
 
    getInitialState: function getInitialState() {
       return {
-        posts: [],
-				filters: [],
+         posts: [],
+         filters: [],
       };
    },
    updatePosts: function updatePosts() {
