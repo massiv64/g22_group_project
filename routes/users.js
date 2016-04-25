@@ -43,10 +43,16 @@ router.get('/login', function(req, res){
   });
 });
 
+app.get('/auth/google', passport.authenticate('google', {scope:['profile', 'email']}));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { successRedirect: '/profile',
+                                      failureRedirect: '/'}))
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/users/login');
-});
+}); 
 
 router.get('/', helpers.ensureAuthenticated, (req,res) => {
   knex('users').then((users) =>{
