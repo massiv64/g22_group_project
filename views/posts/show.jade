@@ -1,5 +1,10 @@
 extends ../layout
 
 block content
-  h2 See more about #{post.title}
-  h3 Body: #{post.body}
+  .container 
+    h2(class="lead") Title: #{post.title}
+      a(href="/users/#{post.user_id}/posts/#{post.id}/edit" class="editBtn") 
+        button(class="btn btn-primary btn-sm") Edit this Post
+    .bodyDiv
+      h4 #{post.body}
+

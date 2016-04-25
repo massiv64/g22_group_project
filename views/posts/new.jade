@@ -1,12 +1,12 @@
 extends ../layout
 
 block content
-
-  h1 Hey #{user.alias} - what are you writing about?
+  h1(class="lead") Hey #{user.alias} - what are you writing about?
   form(action="/users/#{user.id}/posts", method="POST")
     div
-      input(type="text" name="post[title]")
+      label Title: &nbsp;
+      input(type="text" class="title" name="post[title]")
     div
-      input(type="text" name="post[body]")
+      textarea(rows="10" cols="50" name="post[body]")
     div
       input(type="submit" value="Add this post")

@@ -1,42 +1,41 @@
-const knex = require('../db/knex');
-
-module.exports = {
-
-	ensureAuthenticated: (req, res, next) => {
-		if(req.isAuthenticated){
-			return next();
-		} else {
-			req.flash('error', 'Please log in');
-			res.redirect('/users/login');
-		}
-	},
-
-	preventLoginSignup: (req, res, next) => {
-		if(req.isAuthenticated){
-			res.redirect('/users')
-		} else {
-			res.redirect('/users/login');
-		}
-
-	},
-	ensureCorrectUserForPost: (req, res, next) => {
-		if(req.session.id === +req.params.user_id){
-			return next();
-		} else {
-			res.redirect('/users');
-		}
-
-	},
-
-	currentUser: (req, res, next) => {
-		if(!req.session.id){
-			return next();
-		} else {
-			knex('users').where('id', req.session.id).first().then(user => {
-				res.locals.currentUser = user;
-				delete res.locals.currentUser.password;
-				return next();
-			});
-		}
-	}
-};
+const authMiddleware  = {
+  ensureAuthenticated(req,res,next){
+    console.log(req.session);
+    if (!req.user){
+      req.session.flash = {}
+      req.flash('loginMessage', "Please log in first")
+      return res.redirect('/login');
+    }
+    else {
+      return next();
+    }
+  },
+  ensureCorrectUserForPost(req,res,next){
+    if(+req.params.id === req.user.id){
+      return next()
+    }
+    else {
+      res.redirect('#')
+    }
+  },
+  preventLoginSignup(req, res, next) {
+    if (req.user) {
+      return res.redirect(`/`);
+    }
+    else {
+     return next();
+    }
+  },
+  currentUser(req, res, next) {
+    // if the user is authenticated (passport method returns true when serialized)
+    if (req.isAuthenticated()) {
+      // this is available in the view for all requests, deserializing FTW
+      res.locals.currentUser = req.user;
+      return next();
+    }
+    else {
+      return next();
+    }
+  },
+}
+module.exports = authMiddleware;

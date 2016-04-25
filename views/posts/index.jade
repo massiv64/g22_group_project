@@ -1,15 +1,18 @@
 extends ../layout
 
 block content
-  h1 See #{user.alias}'s posts
-  a(href="/users/#{user.id}/posts/new") Add a new post for #{user.alias}
+  .container
+    h1(class="lead") See #{user.alias}'s posts
+    a(href="/users/#{user.id}/posts/new") #{user.alias}, Why don't you add a post here?
 
-  each post in posts
-    .panel.panel-default.panel-info
-      .panel-heading #{post.title}
-      .panel-body #{post.body}
-      a(href="/posts/#{post.id}/comments") See all the comments for this post
-      br
-      a(href="/users/#{user.id}/posts/#{post.id}/edit") Edit this post
-      form(action="/users/#{user.id}/posts/#{post.id}?_method=DELETE" method="POST")
-        input(type="submit" value="X" class="btn btn-sm btn-danger")
+    each post in posts
+      .panel.panel-default.panel-info
+        .panel-heading 
+          a(href="/users/#{post.user_id}/posts/#{post.id}") #{post.title}
+        .panel-body #{post.body}
+        a(href="/posts/#{post.id}/comments") 
+          button(class="btn btn-primary btn-sm") See all the comments for this post
+        a(href="/users/#{user.id}/posts/#{post.id}/edit") 
+          button(class="btn btn-primary btn-sm") Edit this post
+        form(action="/users/#{user.id}/posts/#{post.id}?_method=DELETE" method="POST" class="deleteBtn")
+          input(type="submit" value="X" class="btn btn-sm btn-danger")

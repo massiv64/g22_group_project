@@ -5,7 +5,8 @@ var Page = React.createClass({
 
    getInitialState: function getInitialState() {
       return {
-         posts: []
+         posts: [],
+         filters: [],
       };
    },
    updatePosts: function updatePosts() {
@@ -38,28 +39,7 @@ var Page = React.createClass({
       });
       return <div>
          <h2>Front Page</h2>
-         <div className="menu">
-            <label> Newest </label>
-            &nbsp;
-            <input 
-               type="checkbox"
-               value="newest"
-            />
-            <br/>
-            <label> Unanswered </label>
-            &nbsp;
-            <input 
-               type="checkbox"
-               value="unanswered"
-            />
-            <br/>
-            <label> JavaScript </label>
-            &nbsp;
-            <input 
-               type="checkbox"
-               value="javascript"
-            />
-         </div>
+         <MenuBox />
          {listPosts}
       </div>
    }
@@ -81,5 +61,34 @@ var Post = React.createClass({
       </div>
 	}
 });
+
+var MenuBox = React.createClass({
+	render: function () {
+		return <div className="menu">
+			<label> Search </label>
+		  <input type="text"/>
+			<label> Newest </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="newest"
+            />
+            <br/>
+            <label> Unanswered </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="unanswered"
+            />
+            <br/>
+            <label> JavaScript </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="javascript"
+            />
+         </div>
+	}
+})
 
 ReactDOM.render(<Page />, document.getElementById('container'));

@@ -1,11 +1,12 @@
 extends ../layout
 
 block content
-  h1 Hey #{post.alias} - what are you trying to change?
+  h1(class="lead") Hey #{post.alias} - what are you trying to change?
   form(action="/users/#{post.user_id}/posts/#{post.post_id}?_method=PATCH", method="POST")
     div
-      input(type="text" name="post[title]" value="#{post.title}")
+      label Title: &nbsp; 
+      input(class="title" type="text" name="post[title]" value="#{post.title}")
     div
-      input(type="text" name="post[body]" value="#{post.body}")
+      textarea(rows="10" cols="50" name="post[body]") #{post.body}
     div
       input(type="submit" value="Edit this post")
