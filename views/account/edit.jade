@@ -1,0 +1,11 @@
+extends ../layout.jade
+
+block content
+  h1 Edit your account
+  form(action="/account?_method=PUT", method="POST")
+    input(type="text" name="user[alias]", value="#{user.alias}")
+    input(type="text" name="user[photo]", value="#{user.photo}" placeholder="Link to a photo")
+    input(type="submit" value="submit")
+  h1 Delete your account
+  form(action="/users/#{user.id}?_method=DELETE" method="POST")
+    input(type="submit" value="X" class="btn btn-xs btn-danger")

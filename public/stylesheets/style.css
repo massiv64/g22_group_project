@@ -51,3 +51,7 @@ a:hover {
   color: #3af;
 }
 
+.profilePhoto {
+  max-height: 200px;
+}
+
