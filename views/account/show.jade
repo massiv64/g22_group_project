@@ -1,0 +1,10 @@
+extends ../layout.jade
+
+block content
+  h1= user.alias
+  if !user.photo
+    img.profilePhoto(src="http://memesvault.com/wp-content/uploads/Derp-Face-Meme-Smiley-191.jpg") 
+  else
+    img.profilePhoto(src="#{user.photo}")
+  h3 Email: #{user.email}
+  a(href="/account/edit") Edit Your Account

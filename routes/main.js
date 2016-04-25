@@ -32,8 +32,8 @@ router.get('/auth/linkedin',
   passport.authenticate('linkedin'));
 
 router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  successRedirect: '/',
-  failureRedirect: '/login',
+  successRedirect: '/account/edit',
+  failureRedirect: '/auth/signup',
 }));
 
 //signing up

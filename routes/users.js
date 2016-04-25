@@ -19,10 +19,6 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/profile', function(req, res, next){
-	res.render('users/profile', {user: req.user});
-});
-
 router.get('/:id', (req,res) => {
   knex('users').where({id: req.params.id}).first().then((user) =>{
     res.render("users/show", {user})
