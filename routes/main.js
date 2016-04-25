@@ -10,7 +10,7 @@ var flash = require('express-flash');
 router.use(flash());
 // direct to Frontpage
 router.get("/", authHelpers.ensureAuthenticated, (req,res) => {
-  res.render('main/frontpage');
+  res.render('main/frontpage', {user: req.user});
 });
 
 
