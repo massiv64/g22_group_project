@@ -37,7 +37,29 @@ var Page = React.createClass({
             </div>;
       });
       return <div>
-         <h1>Front Page</h1>
+         <h2>Front Page</h2>
+         <div className="menu">
+            <label> Newest </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="newest"
+            />
+            <br/>
+            <label> Unanswered </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="unanswered"
+            />
+            <br/>
+            <label> JavaScript </label>
+            &nbsp;
+            <input 
+               type="checkbox"
+               value="javascript"
+            />
+         </div>
          {listPosts}
       </div>
    }
@@ -51,7 +73,11 @@ var Post = React.createClass({
             {this.props.title}
             </h3>
          </a>
-         <h5>Created by: {this.props.alias}</h5>
+         <h5>Created by:&nbsp;
+            <a href={"/users/" + this.props.user_id + "/posts"}>
+               {this.props.alias}
+            </a>
+         </h5>
       </div>
 	}
 });
