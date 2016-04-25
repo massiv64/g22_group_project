@@ -9,6 +9,7 @@ const passwordHelpers = require('../helpers/passwordHelpers');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 
+
 router.use(authHelpers.currentUser);
 router.use(authHelpers.ensureAuthenticated)
 
