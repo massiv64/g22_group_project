@@ -1,16 +1,30 @@
+require('dotenv').load()
 const express = require("express")
 const app = express()
 const methodOverride = require("method-override");
 const path = require('path');
 const morgan = require("morgan")
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
+const cookieParser = require('cookie-parser')
 const routes = require("./routes")
+const flash = require('connect-flash')
+const passport = require('passport')
+const session  = require('cookie-session')
+
 
 app.set("view engine", "jade");
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("tiny"))
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SECRET
+}));
 app.use(methodOverride("_method"));
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./helpers/passport.js')(passport);
 
 app.use('/', routes.main);
 app.use('/users', routes.users);
@@ -47,6 +61,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 app.listen(3000, function(){
