@@ -36,7 +36,7 @@ router.get('/:id/edit', (req,res) => {
 });
 
 router.post('/', (req,res) => {
-  knex.insert(req.body.post,"*").into('posts').then((post) =>{
+  knex.insert(req.body.post, "*").into('posts').then((post) =>{
     knex('posts').where({id: post[0].id}).update({user_id: req.params.user_id})
       .then(function(){
             res.redirect(`/users/${req.params.user_id}/posts`);
