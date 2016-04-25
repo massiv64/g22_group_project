@@ -10,6 +10,7 @@ const routes = require("./routes")
 const flash = require('connect-flash')
 const passport = require('passport')
 const session  = require('cookie-session')
+const helpers = require('./helpers/authHelpers')
 
 
 app.set("view engine", "jade");
@@ -26,6 +27,7 @@ app.use(passport.session())
 
 require('./helpers/passport.js')(passport);
 
+app.use(helpers.currentUser);
 app.use('/', routes.main);
 app.use('/users', routes.users);
 app.use('/account', routes.account);
