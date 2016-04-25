@@ -2,10 +2,12 @@ const express = require("express")
 const router = express.Router();
 const knex = require("../db/knex")
 const passport = require('passport')
-const LocalStrategy = require('passport-local').LocalStrategy
+const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
-
+const cookieSession = require('cookie-session')
+const GoogleStrategy = require('passport-google-oauth2').OAuth2Strategy
+const helpers = require('../helpers/authHelpers.js')
 
 //local strategy - nh
 passport.use(new LocalStrategy({
@@ -27,6 +29,11 @@ passport.use(new LocalStrategy({
     }
 ));
 
+// passport.use(new GoogleStrategy({
+//   clientID: process.env.G,
+//   client
+// }))
+
 passport.serializeUser(function(user, done){
   done(null, user.id)
 });
@@ -43,9 +50,9 @@ router.get('/login', function(req, res){
   });
 });
 
-app.get('/auth/google', passport.authenticate('google', {scope:['profile', 'email']}));
+router.get('/auth/google', passport.authenticate('google', {scope:['profile', 'email']}));
 
-app.get('/auth/google/callback',
+router.get('/auth/google/callback',
   passport.authenticate('google', { successRedirect: '/profile',
                                       failureRedirect: '/'}))
 

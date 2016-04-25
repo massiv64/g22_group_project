@@ -11,7 +11,7 @@ module.exports = {
 		}
 	},
 
-	preventLoginSignup: (rq, res, next) => {
+	preventLoginSignup: (req, res, next) => {
 		if(req.isAuthenticated){
 			res.redirect('/users')
 		} else {
@@ -19,7 +19,7 @@ module.exports = {
 		}
 
 	},
-	ensureCorrectUserForPost : (req, res, next) => {
+	ensureCorrectUserForPost: (req, res, next) => {
 		if(req.session.id === +req.params.user_id){
 			return next();
 		} else {
