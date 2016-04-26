@@ -1,12 +1,12 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table('users', function(t){
-    t.integer('verified');
+    t.integer('is_verified');
   })
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('users', function(t){
-    t.dropColumn('verified');
+    t.dropColumn('is_verified');
   })
 };
