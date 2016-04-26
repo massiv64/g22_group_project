@@ -3,6 +3,9 @@ exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
     knex('users').del(),
+    knex('posts').del(),
+    knex('comments').del(),
+    knex('categories').del(),
 
     // Inserts seed entries
     knex('users').insert({id: 2000, alias: "Jenny", photo: 'https://goo.gl/ISKmPE', email: 'testlo@test.com'}),
