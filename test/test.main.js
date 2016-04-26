@@ -5,6 +5,7 @@ const expect = require('chai').expect;
 const knex = require('../db/knex');
 const app = require('../app');
 
+
 describe('GET /', () => {
   it('responds', done => {
     request(app)
@@ -13,20 +14,20 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /users', () => {
+describe('GET /login', () => {
   it('responds with JSON', done => {
     request(app)
-      .get('/users')
+      .get('/login')
       .expect('Content-Type', /json/)
       .expect(200, done);
   });
 });
 
-describe('GET /users/:id', () => {
+describe('GET /signup', () => {
 
-  it('responds with a user profile', done => {
+  it('responds with signup page', done => {
     request(app)
-      .get('/sloths/1')
+      .get('/signup')
       .expect('Content-Type', /json/)
       .expect(200, done);
   });
