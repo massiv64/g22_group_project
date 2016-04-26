@@ -7,8 +7,11 @@ block content
     img(id="photoDisplay", src="#{user.photo}" class="profilePhoto")
     .inputGroup
       button(id="reset") Reset Form
+      h5 Alias
       input(id="aliasInput", type="text" name="user[alias]",  placeholder="What should we call you?")
+      h5 Profile Photo
       input(id="photoInput", type="text" name="user[photo]", placeholder="Link to a photo")
+      h5 Password
       input(id="passwordInput", type="password", name="user[password]", placeholder="Update your password" autocomplete="off")
       input(type="submit" value="submit" id="submit")
   h1 Delete your account
