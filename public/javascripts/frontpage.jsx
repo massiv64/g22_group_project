@@ -36,7 +36,7 @@ var Page = React.createClass({
                   post_id={v.post_id}
                   user_id={v.user_id}
                />
-            </div>;
+            </div>
           )
       });
       return (
