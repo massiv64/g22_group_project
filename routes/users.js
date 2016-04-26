@@ -34,27 +34,27 @@ router.get('/:id/edit', (req,res) => {
     res.render("error", {err})
   });
 });
+//remove me later! -nic
+// router.post('/', (req,res) => {
+//   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+//     bcrypt.hash(req.body.user.password, salt, (err, hash) => {
+//       knex('users').insert({
+//         email: req.body.user.email,
+//         password: hash
+//       }).then(() => {
+//         res.redirect('/users')
+//       }).catch(err => {
+//         res.render('new')
+//       });
+//     });
+//   });
 
-router.post('/', (req,res) => {
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-    bcrypt.hash(req.body.user.password, salt, (err, hash) => {
-      knex('users').insert({
-        email: req.body.user.email,
-        password: hash
-      }).then(() => {
-        res.redirect('/users')
-      }).catch(err => {
-        res.render('new')
-      });
-    });
-  });
-
-  knex('users').insert(req.body.user).then(() =>{
-    res.redirect('/users')
-  }).catch((err) =>{
-    res.render("error", {err})
-  });
-});
+//   knex('users').insert(req.body.user).then(() =>{
+//     res.redirect('/users')
+//   }).catch((err) =>{
+//     res.render("error", {err})
+//   });
+// });
 
 router.patch('/:id', (req,res) => {
   knex('users').where({id:req.params.id}).update(req.body.user).then(() =>{

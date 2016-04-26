@@ -19,7 +19,7 @@ router.get('/login', function(req, res, next){
 	res.render('auth/login');
 })
 
-router.get('/signup', function(req, res, next){
+router.get('/signup', authHelpers.preventLoginSignup, function(req, res, next){
   res.render('auth/signup', {message: req.flash('loginMessage')});
 });
 
