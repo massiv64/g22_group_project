@@ -16,9 +16,25 @@ module.exports = (passport) => {
       state: true
   },
   function(accessToken, refreshToken, profile, done){
-    knex('users').where('token', profile.id).first().then(user=> {
+    //is this email in the database?
+    knex('users').where('email', profile._json.emails[0].value).first().then(user=> {
       // eval(require("locus"))
       if(user){
+        //does this person w/ a registered email have a Google token?
+        knex('users').where('token', profile.id).first().then(foundUser => {
+          if(foundUser){
+            return(done(null, foundUser))
+          } else {
+            //if they do not, we add more data to the user profile from Google
+            knex('users').where('email', profile._json.emails[0].value).first().update({
+              token: profile.id,
+              alias: profile._json.displayName,
+              photo: profile.photos[0].value
+            }).then(user => {
+              return done(null, user)
+            })
+          }
+        })
         return done(null, user);
       }
       else {
