@@ -30,10 +30,10 @@ body
                 a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false") 
                   span.glyphicon.glyphicon-menu-hamburger(aria-hidden="true")
                 ul.dropdown-menu( role="menu" )
-                    li: a( href="/users/profile" ) Profile
+                    li: a( href="/account" ) Profile
                     li: a( href="/users/#{currentUser.id}/posts/new" ) Add Post
                     li.divider
-                    li: a( href="/users/#{currentUser.id}/edit" ) Account Settings
+                    li: a( href="/account/edit" ) Account Settings
                     li: a( href="/logout" ) Logout 
     div.container
       block content
@@ -43,4 +43,4 @@ body
     div.container
       block content
       script(src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
-      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/")
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")

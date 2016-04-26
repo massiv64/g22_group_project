@@ -62,4 +62,7 @@ a:hover {
 .profilePhoto {
   max-height: 200px;
 }
+.thumb {
+  max-height:40px;
+}
 
