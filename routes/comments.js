@@ -1,10 +1,14 @@
 const express = require("express")
 const router = express.Router({mergeParams: true});
 const knex = require("../db/knex")
+const markdown = require('markdown').markdown;
 
 router.get('/', (req,res) => {
   knex('comments').where({post_id: req.params.post_id}).then((comments) =>{
     knex('posts').where({id: req.params.post_id}).first().then((post) => {
+      comments.forEach(function(val) {
+        val.content = markdown.toHTML(val.content) 
+      });
       res.render("comments/index", {comments,post})
     })
   }).catch((err) =>{
