@@ -26,7 +26,7 @@ var Page = React.createClass({
          return val.title.indexOf(search) > -1;
        })
        this.setState({posts: filtered})
-      }.bind(this));
+      }.bind(this))
       );
    },
    componentWillMount: function componentWillMount() {

@@ -38,7 +38,6 @@ router.get('/:id', (req,res) => {
       comments.forEach(val => {
         val.content = markdown.toHTML(val.content);
       });
-      eval(require('locus'));
       post.body = markdown.toHTML(post.body)
       res.render("posts/show", {post, comments})  
     })
