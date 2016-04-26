@@ -27,7 +27,8 @@ var Page = React.createClass({
    },
    render: function () {
       var listPosts = this.state.posts.map(function (v, i) {
-         return <div className="tile" key={i}>
+         return (
+            <div className="tile" key={i}>
                <Post
                   title={v.title}
                   alias={v.alias}
@@ -36,12 +37,15 @@ var Page = React.createClass({
                   user_id={v.user_id}
                />
             </div>;
+          )
       });
-      return <div>
+      return (
+      <div>
          <h2>Front Page</h2>
          <MenuBox />
          {listPosts}
       </div>
+    );
    }
 });
 
@@ -71,21 +75,21 @@ var MenuBox = React.createClass({
             <input type="text"/>
 			<label> Newest </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="newest"
             />
             <br/>
             <label> Unanswered </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="unanswered"
             />
             <br/>
             <label> JavaScript </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="javascript"
             />
