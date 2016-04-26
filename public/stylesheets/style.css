@@ -16,6 +16,27 @@
   width: 29.5vw;
 }
 
+.inputGroup{
+  margin: 20px 0;
+}
+
+.inputGroup input {
+  display:block;
+  margin: 10px 0;
+  width: 250px;
+}
+#reset{
+  position:relative;
+  left:260px;
+  top: -20px;
+  width: 65px;
+}
+
+#submit {
+  width: 150px;
+  margin: 10px 50px;
+}
+
 .google {
   color: red;
 }
@@ -39,7 +60,7 @@
   border-radius: 10px;
   margin: 10px;
   width: 80vw;
-  height: 70vh;
+  height: auto;
   padding: 2vw;
 }
 
@@ -65,4 +86,3 @@ a:hover {
 .thumb {
   max-height:40px;
 }
-

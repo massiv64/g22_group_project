@@ -3,5 +3,8 @@ extends ../layout
 block content
   h1 Edit a comment about - #{post.title}
   form(action="/posts/#{post.id}/comments/#{comment.id}?_method=PATCH", method="POST")
-    input(type="text" name="comment[content]" value="#{comment.content}")
+    textarea(id="body" rows="10" cols="50" name="comment[content]") #{comment.content}
     input(type="submit" value="Add this comment")
+  script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")
+  script(src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")
+  script(src="/javascripts/script.js")
