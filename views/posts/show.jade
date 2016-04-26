@@ -6,7 +6,18 @@ block content
       a(href="/users/#{post.user_id}/posts/#{post.id}/edit" class="editBtn") 
         button(class="btn btn-primary btn-sm") Edit this Post
     .bodyDiv
-      !{post.body}
+      h4(class="lead") Body:
+      .bodyBody
+        !{post.body}
+      h4(class="lead") Comments:
+      each comment in comments
+        .commentDiv 
+          img(class="icon" src="#{comment.photo}")
+          .commentBody
+            !{comment.content} 
+            p(class="commentAuthor") Comment by #{comment.alias}
+    a(href="/posts/#{post.id}/comments/new" class="newBtn") 
+      button(class="btn btn-primary btn-sm") Add a Comment
   script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")
   script(src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")
   script(src="/javascripts/script.js")
