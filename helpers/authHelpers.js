@@ -26,6 +26,13 @@ const authMiddleware  = {
      return next();
     }
   },
+  ensureCorrectUserForEdit(req,res,next){
+  	if (+req.params.id === req.user.id){
+  		return next()
+  	} else {
+  		res.redirect('#')
+  	}
+  },
   currentUser(req, res, next) {
     // if the user is authenticated (passport method returns true when serialized)
     if (req.isAuthenticated()) {

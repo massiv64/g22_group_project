@@ -18,6 +18,17 @@ var Page = React.createClass({
          posts: this.state.posts
       });
    },
+   searchFilter: function searchFilter(e){
+     var search = e.target.value;
+     var filtered;
+      $.getJSON("/posts").then((function (posts) {
+       filtered = posts.filter(function(val, index){
+         return val.title.indexOf(search) > -1;
+       })
+       this.setState({posts: filtered})
+      }.bind(this));
+      );
+   },
    componentWillMount: function componentWillMount() {
       $.getJSON("/posts").then((function (posts) {
          this.setState({
@@ -27,7 +38,8 @@ var Page = React.createClass({
    },
    render: function () {
       var listPosts = this.state.posts.map(function (v, i) {
-         return <div className="tile" key={i}>
+         return (
+            <div className="tile" key={i}>
                <Post
                   title={v.title}
                   alias={v.alias}
@@ -35,13 +47,18 @@ var Page = React.createClass({
                   post_id={v.post_id}
                   user_id={v.user_id}
                />
-            </div>;
+            </div>
+          )
       });
-      return <div>
+      return (
+      <div>
          <h2>Front Page</h2>
-         <MenuBox />
+         <MenuBox
+            searchFilter={this.searchFilter}
+          />
          {listPosts}
       </div>
+    );
    }
 });
 
@@ -68,24 +85,24 @@ var MenuBox = React.createClass({
          <a href="#top"> Scroll to the Top </a>
          <br/>
 			<label> Search </label>
-            <input type="text"/>
+            <input onKeyUp={this.props.searchFilter} type="text"/>
 			<label> Newest </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="newest"
             />
             <br/>
             <label> Unanswered </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="unanswered"
             />
             <br/>
             <label> JavaScript </label>
             &nbsp;
-            <input 
+            <input
                type="checkbox"
                value="javascript"
             />
