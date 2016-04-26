@@ -19,7 +19,7 @@ router.get('/login', function(req, res, next){
 	res.render('auth/login');
 })
 
-router.get('/signup', function(req, res, next){
+router.get('/signup', authHelpers.preventLoginSignup, function(req, res, next){
   res.render('auth/signup', {message: req.flash('loginMessage')});
 });
 
@@ -39,20 +39,12 @@ router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
 //signing up
 router.post('/signup', (req, res) => {
   passwordHelpers.createUser(req).then((user) => {
-    // passport.authenticate('local', (err, user) =>{
-    //   if (err){
-    //     return next(err);
-    //   }
-    //   if (!user){
-    //     return res.redirect('/signup');
-    //   }
       req.login(user[0], (err) => {
         if (err) {
           return next(err);
         }
         return res.redirect(`/`);
       })
-      // })
     }).catch((err) =>{
       if(err.constraint === 'users_email_unique'){
         err.message = 'email is already taken'
