@@ -24,8 +24,7 @@ describe('GET /login', () => {
 });
 
 describe('GET /signup', () => {
-
-  it('responds with signup page', done => {
+  it('responds with JSON', done => {
     request(app)
       .get('/signup')
       .expect('Content-Type', /json/)
