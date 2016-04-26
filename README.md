@@ -28,4 +28,8 @@ Handle any merge conflicts on your own side computer
 
 + `git push origin master`
 
-Finally, initiate a pull request on GitHub
+Initiate a pull request on GitHub.
+
+Then, 
++ npm install
++ knex migrate:latest && knex migrate:latest --env test
