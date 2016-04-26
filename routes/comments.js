@@ -36,9 +36,14 @@ router.get('/:id/edit', (req,res) => {
   });
 });
 
+
+
+
+
+//old post route
 router.post('/', (req,res) => {
   knex.insert(req.body.comment, "*").into('comments').then((comment) =>{
-    knex('comments').where({id: comment[0].id}).update({post_id: req.params.post_id})
+    knex('comments').where({id: comment[0].id}).update({post_id: req.params.post_id, user_id: req.session.passport.user,})
       .then(function(){
         res.redirect(`/posts/${req.params.post_id}/comments`)
       })
