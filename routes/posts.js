@@ -8,8 +8,6 @@ const markdown = require('markdown').markdown;
 
 //should show all of the comments associated to that post along withe comment 
 
-
-
 router.get('/', (req,res) => {
   knex('posts').where({user_id: req.params.user_id}).then((posts) =>{
         knex('users').where({id: req.params.user_id}).first().then((user) => {
@@ -30,23 +28,20 @@ router.get('/new', (req,res) => {
 })
 
 router.get('/:id', (req,res) => {
-
   knex('posts').where({id: req.params.id}).first().then((post) =>{
-//sara's edits to try to join to the user table. work in progress
-    knex('comments').where({post_id: req.params.id}).then( (comment) => {
-      // knex('users').where({id: user_id}).then ( (user) => {
-    // eval(require('locus'));
-    res.render("posts/show", {post,comment, user})
-        // })
-      })
-    }).catch((err) =>{
-      res.render("error", {err})
-//chris's edits  for the markdown 
-    post.body = markdown.toHTML(post.body)
-    res.render("posts/show", {post})
-  }).catch((err) =>{
-    res.render("error", {err})
-
+    knex('comments as c')
+    .select('c.id as cid', 'c.content', 'c.post_id as pid', 'u.id as uid', 'u.alias as alias', 'u.photo as photo')
+    .leftOuterJoin('users as u', 'c.user_id', 'u.id')
+    .where('c.post_id', req.params.id)
+    .orderBy('c.id')
+    .then(comments => {
+      comments.forEach(val => {
+        val.content = markdown.toHTML(val.content);
+      });
+      eval(require('locus'));
+      post.body = markdown.toHTML(post.body)
+      res.render("posts/show", {post, comments})  
+    })
   });
 });
 
