@@ -3,10 +3,14 @@ const router = express.Router({mergeParams: true});
 const knex = require("../db/knex")
 const Promise = require("bluebird")
 const _ = require("lodash")
+const markdown = require('markdown').markdown;
 
 router.get('/', (req,res) => {
   knex('posts').where({user_id: req.params.user_id}).then((posts) =>{
         knex('users').where({id: req.params.user_id}).first().then((user) => {
+          posts.forEach(function(val,index) {
+            val.body = markdown.toHTML(val.body) 
+          });
           res.render("posts/index", {posts,user})
         })
   }).catch((err) =>{
@@ -22,6 +26,7 @@ router.get('/new', (req,res) => {
 
 router.get('/:id', (req,res) => {
   knex('posts').where({id: req.params.id}).first().then((post) =>{
+    post.body = markdown.toHTML(post.body)
     res.render("posts/show", {post})
   }).catch((err) =>{
     res.render("error", {err})

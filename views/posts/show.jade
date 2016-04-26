@@ -6,7 +6,7 @@ block content
       a(href="/users/#{post.user_id}/posts/#{post.id}/edit" class="editBtn") 
         button(class="btn btn-primary btn-sm") Edit this Post
     .bodyDiv
-      textarea(id="preview" rows="10" cols="50" name="post[body]" readonly) #{post.body}
+      !{post.body}
   script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")
   script(src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")
   script(src="/javascripts/script.js")

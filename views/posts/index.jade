@@ -9,7 +9,8 @@ block content
       .panel.panel-default.panel-info
         .panel-heading 
           a(href="/users/#{post.user_id}/posts/#{post.id}") #{post.title}
-        .panel-body #{post.body}
+        .panel-body 
+          !{post.body}
         a(href="/posts/#{post.id}/comments") 
           button(class="btn btn-primary btn-sm") See all the comments for this post
         a(href="/users/#{user.id}/posts/#{post.id}/edit") 

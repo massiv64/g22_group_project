@@ -12,7 +12,6 @@ const passport = require('passport')
 const session  = require('cookie-session')
 const helpers = require('./helpers/authHelpers')
 
-
 app.set("view engine", "jade");
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("tiny"))
