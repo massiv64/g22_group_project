@@ -9,7 +9,6 @@ const passwordHelpers = require('../helpers/passwordHelpers');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 
-
 router.use(authHelpers.currentUser);
 router.use(authHelpers.ensureAuthenticated)
 
@@ -30,12 +29,5 @@ router.put('/', (req,res) => {
     res.redirect('/account')
   })
 });
-
-router.delete('/', function(req,res,next){
-  knex('users').where('id', +req.user.id).first().del().then(() => {
-    req.session = null;
-    res.redirect('/');
-  })
-})
 
 module.exports = router;

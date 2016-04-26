@@ -29,17 +29,19 @@ router.get('/new', (req,res) => {
 
 router.get('/:id', (req,res) => {
   knex('posts').where({id: req.params.id}).first().then((post) =>{
-    knex('comments as c')
-    .select('c.id as cid', 'c.content', 'c.post_id as pid', 'u.id as uid', 'u.alias as alias', 'u.photo as photo')
-    .leftOuterJoin('users as u', 'c.user_id', 'u.id')
-    .where('c.post_id', req.params.id)
-    .orderBy('c.id')
-    .then(comments => {
-      comments.forEach(val => {
-        val.content = markdown.toHTML(val.content);
-      });
-      post.body = markdown.toHTML(post.body)
-      res.render("posts/show", {post, comments})  
+    knex('users').where({id: req.params.user_id}).first().then( user => {
+      knex('comments as c')
+      .select('c.id as cid', 'c.content', 'c.post_id as pid', 'u.id as uid', 'u.alias as alias', 'u.photo as photo')
+      .leftOuterJoin('users as u', 'c.user_id', 'u.id')
+      .where('c.post_id', req.params.id)
+      .orderBy('c.id')
+      .then(comments => {
+        comments.forEach(val => {
+          val.content = markdown.toHTML(val.content);
+        });
+        post.body = markdown.toHTML(post.body)
+        res.render("posts/show", {post, comments, user})  
+      })
     })
   });
 });

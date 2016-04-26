@@ -8,14 +8,17 @@ block content
     .bodyDiv
       h4(class="lead") Body:
       .bodyBody
-        !{post.body}
+        img(class="icon" src="#{user.photo}")
+        .commentBody
+          !{post.body}
+          p(class="postAuthor") Posted by #{user.alias}
       h4(class="lead") Comments:
       each comment in comments
         .commentDiv 
           img(class="icon" src="#{comment.photo}")
           .commentBody
             !{comment.content} 
-            p(class="commentAuthor") Comment by #{comment.alias}
+            p(class="commentAuthor") Commented by #{comment.alias}
     a(href="/posts/#{post.id}/comments/new" class="newBtn") 
       button(class="btn btn-primary btn-sm") Add a Comment
   script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")

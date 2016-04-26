@@ -78,8 +78,8 @@
   margin-left: 8vw;
 }
 
-.commentAuthor {
-  color: rgba(255,102,102,0.8);
+.commentAuthor, .postAuthor {
+  color: rgba(255,50,102,1);
   font-size: 12px;
   font-family: "Times New Roman", Georgia, Serif; 
 }
