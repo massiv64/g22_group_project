@@ -16,6 +16,14 @@
   width: 29.5vw;
 }
 
+.google {
+  color: red;
+}
+
+.google:hover {
+  color: rgba(255, 51, 153, 1);
+}
+
 .menu {
   position: fixed;
   right: 0vw;
@@ -49,5 +57,9 @@ a {
 
 a:hover {
   color: #3af;
+}
+
+.profilePhoto {
+  max-height: 200px;
 }
 

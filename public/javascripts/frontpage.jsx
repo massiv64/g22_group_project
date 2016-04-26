@@ -65,8 +65,10 @@ var Post = React.createClass({
 var MenuBox = React.createClass({
 	render: function () {
 		return <div className="menu">
+         <a href="#top"> Scroll to the Top </a>
+         <br/>
 			<label> Search </label>
-		  <input type="text"/>
+            <input type="text"/>
 			<label> Newest </label>
             &nbsp;
             <input 
