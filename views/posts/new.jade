@@ -7,6 +7,10 @@ block content
       label Title: &nbsp;
       input(type="text" class="title" name="post[title]")
     div
-      textarea(rows="10" cols="50" name="post[body]")
+      textarea(id="body" rows="10" cols="50" name="post[body]")
     div
       input(type="submit" value="Add this post")
+  script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")
+  script(src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")
+  script(src="/javascripts/script.js")
+
