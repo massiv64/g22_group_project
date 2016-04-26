@@ -18,6 +18,17 @@ var Page = React.createClass({
          posts: this.state.posts
       });
    },
+   searchFilter: function searchFilter(e){
+     var search = e.target.value;
+     var filtered;
+      $.getJSON("/posts").then((function (posts) {
+       filtered = posts.filter(function(val, index){
+         return val.title.indexOf(search) > -1;
+       })
+       this.setState({posts: filtered})
+      }.bind(this));
+      );
+   },
    componentWillMount: function componentWillMount() {
       $.getJSON("/posts").then((function (posts) {
          this.setState({
@@ -42,7 +53,9 @@ var Page = React.createClass({
       return (
       <div>
          <h2>Front Page</h2>
-         <MenuBox />
+         <MenuBox
+            searchFilter={this.searchFilter}
+          />
          {listPosts}
       </div>
     );
@@ -72,7 +85,7 @@ var MenuBox = React.createClass({
          <a href="#top"> Scroll to the Top </a>
          <br/>
 			<label> Search </label>
-            <input type="text"/>
+            <input onKeyUp={this.props.searchFilter} type="text"/>
 			<label> Newest </label>
             &nbsp;
             <input
