@@ -4,9 +4,15 @@ const knex = require("../db/knex")
 const Promise = require("bluebird")
 const _ = require("lodash")
 
+
+//should show all of the comments associated to that post along withe comment 
+
+
+
 router.get('/', (req,res) => {
   knex('posts').where({user_id: req.params.user_id}).then((posts) =>{
         knex('users').where({id: req.params.user_id}).first().then((user) => {
+          
           res.render("posts/index", {posts,user})
         })
   }).catch((err) =>{
@@ -21,10 +27,16 @@ router.get('/new', (req,res) => {
 })
 
 router.get('/:id', (req,res) => {
+
   knex('posts').where({id: req.params.id}).first().then((post) =>{
-    res.render("posts/show", {post})
-  }).catch((err) =>{
-    res.render("error", {err})
+    knex('comments').where({post_id: req.params.id}).then( (comment) => {
+      // knex('users').where({id: user_id}).then ( (user) => {
+    // eval(require('locus'));
+    res.render("posts/show", {post,comment, user})
+        // })
+      })
+    }).catch((err) =>{
+      res.render("error", {err})
   });
 });
 
