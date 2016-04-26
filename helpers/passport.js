@@ -1,19 +1,18 @@
 const passportLocal = require("passport-local");
-const FacebookStrategy = require("passport-facebook").Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const knex = require("../db/knex");
 const passwordHelpers = require("./passwordHelpers");
-const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
 
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').load();
 }
 
 module.exports = (passport) => {
-  passport.use(new LinkedInStrategy({
-      clientID: process.env.LINKEDIN_CLIENT_ID,
-      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/linkedin/callback',
-      scope: ['r_emailaddress', 'r_basicprofile'],
+  passport.use(new GoogleStrategy({
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3000/auth/google/callback',
+      scope: ['profile', 'email'],
       state: true
   },
   function(accessToken, refreshToken, profile, done){
@@ -22,7 +21,6 @@ module.exports = (passport) => {
         return done(null, user);
       }
       else {
-
         knex('users').insert({
           token: profile.id,
           alias: profile._json.formattedName, 
@@ -43,13 +41,12 @@ module.exports = (passport) => {
     passwordField: 'user[password]',
     passReqToCallback : true
   },(req,email, password, done) =>{
-      knex.select('users.id as id', 'identities.password', 'users.email').from('users').
-      where({ email }).join("identities","user_id","users.id").first().then((user) =>{
+      knex('users').where({ email }).first().then((user) =>{
         if (!user) {
           return done(null, false, req.flash('loginMessage','Incorrect username.'));
         }
         if(!user.password){
-          return done(null, false, req.flash('loginMessage','You already has an account with facebook'));
+          return done(null, false, req.flash('loginMessage','You already has an account with Google'));
         }
         if (!passwordHelpers.comparePass(password, user.password)) {
           return done(null, false, req.flash('loginMessage', 'Incorrect password.'));
