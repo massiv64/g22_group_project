@@ -27,50 +27,5 @@ router.get('/:id', (req,res) => {
   });
 });
 
-router.get('/:id/edit', (req,res) => {
-  knex('users').where({id: req.params.id}).first().then((user) =>{
-    res.render("users/edit", {user})
-  }).catch((err) =>{
-    res.render("error", {err})
-  });
-});
-//remove me later! -nic
-// router.post('/', (req,res) => {
-//   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-//     bcrypt.hash(req.body.user.password, salt, (err, hash) => {
-//       knex('users').insert({
-//         email: req.body.user.email,
-//         password: hash
-//       }).then(() => {
-//         res.redirect('/users')
-//       }).catch(err => {
-//         res.render('new')
-//       });
-//     });
-//   });
-
-//   knex('users').insert(req.body.user).then(() =>{
-//     res.redirect('/users')
-//   }).catch((err) =>{
-//     res.render("error", {err})
-//   });
-// });
-
-router.patch('/:id', (req,res) => {
-  knex('users').where({id:req.params.id}).update(req.body.user).then(() =>{
-    res.redirect('/users')
-  }).catch((err) =>{
-    res.render("error", {err})
-  });
-});
-
-router.delete('/:id', (req,res) => {
-  knex('users').where({id:req.params.id}).del().then(() =>{
-    res.redirect('/users')
-  }).catch((err) =>{
-    res.render("error", {err})
-  });
-});
-
 
 module.exports = router;
