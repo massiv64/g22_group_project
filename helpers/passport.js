@@ -17,15 +17,16 @@ module.exports = (passport) => {
   },
   function(accessToken, refreshToken, profile, done){
     knex('users').where('token', profile.id).first().then(user=> {
+      // eval(require("locus"))
       if(user){
         return done(null, user);
       }
       else {
         knex('users').insert({
           token: profile.id,
-          alias: profile._json.formattedName, 
-          email: profile._json.emailAddress,
-          photo: profile._json.pictureUrl
+          alias: profile._json.displayName, 
+          email: profile._json.emails[0].value,
+          photo: profile.photos[0].value
         }, "*").then(user => {
           return done(null, user[0]);
         });

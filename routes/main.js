@@ -28,12 +28,12 @@ router.get('/logout', (req,res) =>{
  res.redirect('/login');
 });
 
-router.get('/auth/linkedin', 
-  passport.authenticate('linkedin'));
+router.get('/google', 
+  passport.authenticate('google'));
 
-router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+router.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/account/edit',
-  failureRedirect: '/auth/signup',
+  failureRedirect: '/signup',
 }));
 
 //signing up
@@ -70,7 +70,22 @@ router.post('/login',
 module.exports = router;
 
 
+// router.get('/google',
+//   passport.authenticate('google'));
 
+// router.get('/auth/google/callback', (req, res) => {
+//   passport.authenticate('google', (err, user) => {
+//     if(err) return next(err)
+//       else {
+//         req.logIn(user, (err) => {
+//           if(err){
+//             req.flash('loginMessge', err)
+//             res.redirect('/login')
+//           }
+//         })
+//       }
+//   })
+// })
 
 router.get('/posts', (req,res) => {
   knex.select("posts.id as post_id", "users.alias", "posts.user_id as user_id", "posts.body", "posts.title").from('posts').join("users", "posts.user_id", "users.id").then((posts) => {
