@@ -42,9 +42,9 @@ module.exports = (passport) => {
     usernameField: 'user[email]',
     passwordField: 'user[password]',
     passReqToCallback : true
-  },(req,email, password, done) =>{
-      knex.select('users.id as id', 'identities.password', 'users.email').from('users').
-      where({ email }).join("identities","user_id","users.id").first().then((user) =>{
+  },(req, email, password, done) =>{
+      knex('users').
+      where({ email }).first().then((user) =>{
         if (!user) {
           return done(null, false, req.flash('loginMessage','Incorrect username.'));
         }
