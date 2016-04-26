@@ -19,14 +19,14 @@ var Page = React.createClass({
       });
    },
    searchFilter: function searchFilter(e){
-     var search = e.target.value;
+     var search = e.target.value.toLowerCase();
      var filtered;
       $.getJSON("/posts").then((function (posts) {
        filtered = posts.filter(function(val, index){
-         return val.title.indexOf(search) > -1;
+         return val.title.toLowerCase().indexOf(search) > -1;
        })
        this.setState({posts: filtered})
-      }.bind(this));
+      }.bind(this))
       );
    },
    componentWillMount: function componentWillMount() {
