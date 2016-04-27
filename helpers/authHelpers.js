@@ -28,6 +28,7 @@ const authMiddleware  = {
   },
   //should ensure only the current user can edit/update posts that pertain to their id - nicarooni	
   ensureCorrectUserForEdit(req,res,next){
+    eval(require('locus'))
   	if (+req.params.id === req.user.id){
   		return next()
   	} else {
