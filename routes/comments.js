@@ -33,7 +33,6 @@ router.get('/:id', (req,res) => {
 });
 
 router.get('/:id/edit', (req,res) => {
-  eval(require('locus'))
   knex('comments').where({id: req.params.id}).first().then((comment) =>{
     knex('posts').where({id: comment.post_id}).first().then((post) => {
       res.render("comments/edit", {post,comment})
