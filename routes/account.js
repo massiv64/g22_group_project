@@ -26,20 +26,11 @@ router.get('/edit', function(req, res){
 	})
 })
 
-router.put('/',(req,res) => {
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt ) => {
-    bcrypt.hash(req.body.user.password, salt, (err, hash) => {
-  knex('users').where({id:req.session.passport.user}).update({
-          email: req.body.user.email,
-          alias: req.body.user.alias,
-          photo: req.body.user.photo,
-          password: hash, 
-        }, '*').then(function(){
-    res.redirect('/account')
-      })
+
+router.put('/', passwordHelpers.editUser, (req,res) => {
+      res.redirect('/account')
     });
-  })
-})
+
 
 
 module.exports = router;
