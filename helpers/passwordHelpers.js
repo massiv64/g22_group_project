@@ -28,48 +28,34 @@ exports.createUser = (req)=> {
       return knex('users').insert({
         email: req.body.user.email,
         password:hash,
-        is_verified: false
+        is_verified: 0
       }, "*")
     })
 },
 
-exports.editUser = (req)=> {
+exports.editUser = (req, res, done)=> {
       const salt = bcrypt.genSaltSync();
-// <<<<<<< HEAD
       const hash = bcrypt.hashSync(req.body.user.password, salt)
       if(req.user.token){ 
-      return knex('users').where('id', +req.user.id).first().update({
+        knex('users').where('id', +req.user.id).first().update({
         is_verified: true,
         email:req.body.user.email,
         alias: req.body.user.alias,
         photo: req.body.user.photo,
         password: hash,
       }).then(function(){
-       }, '*')
+        return done()
+       })
       } else {
-        return knex('users').where({id: req.body.user.id}).update({
+        knex('users').where({id: req.body.user.id}).first.update({
         password: hash,
         email: req.body.user.email,
         photo: req.body.user.photo,
         alias: req.body.user.alias,
+      }).then(function(){
+        return done()
       })
     }
   }
-      // knex('users').where('id', +req.user.id).first().update(req.body.user).then(function()
-     // return   knex('users').where({id:req.session.passport.user}).update({
-     //      email: req.body.user.email,
-     //      alias: req.body.user.alias,
-     //      photo: req.body.user.photo,
-     //      password: hash, 
-     //    }, '*')
-  
-      // return knex('users').where({id: req.params.id}).update({
-
-      //   password: hash
-      // }, "*");
-// =======
-
-   
-// >>>>>>> 78495ce94371a091f7a256f6a88b5a9f29b930a0
 
 exports.comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);

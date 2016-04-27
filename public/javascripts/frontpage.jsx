@@ -6,7 +6,7 @@ var Page = React.createClass({
    getInitialState: function getInitialState() {
       return {
          posts: [],
-         filters: [],
+         categories: [],
       };
    },
    updatePosts: function updatePosts() {
@@ -35,6 +35,11 @@ var Page = React.createClass({
             posts: posts
          });
       }).bind(this));
+      $.getJSON('/categories').then((function(categories) {
+        this.setState({
+          categories: categories
+        });
+      }).bind(this));
    },
    render: function () {
       var listPosts = this.state.posts.map(function (v, i) {
@@ -55,6 +60,7 @@ var Page = React.createClass({
          <h2>Front Page</h2>
          <MenuBox
             searchFilter={this.searchFilter}
+            categories={this.state.categories}
           />
          {listPosts}
       </div>
@@ -79,34 +85,42 @@ var Post = React.createClass({
 	}
 });
 
+var Checkbox = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <label> {this.props.technology} </label>
+        &nbsp;
+        <input
+          id={"check" + this.props.id}
+          type="checkbox"
+          value={this.props.technology}
+        />
+        <br/>
+      </div>
+    )
+  }
+})
+
 var MenuBox = React.createClass({
-	render: function () {
+  render: function () {
+    var listCategories = this.props.categories.map(function(v, i) {
+      return (
+        <div className ="checkbox" id={i}>
+          <Checkbox
+            id={"check" + v.id}
+            technology={v.technology}
+          />
+        </div>
+      )
+    })
 		return <div className="menu">
-         <a href="#top"> Scroll to the Top </a>
-         <br/>
+      <a href="#top"> Scroll to the Top </a>
+      <br/>
 			<label> Search </label>
-            <input onKeyUp={this.props.searchFilter} type="text"/>
-			<label> Newest </label>
-            &nbsp;
-            <input
-               type="checkbox"
-               value="newest"
-            />
-            <br/>
-            <label> Unanswered </label>
-            &nbsp;
-            <input
-               type="checkbox"
-               value="unanswered"
-            />
-            <br/>
-            <label> JavaScript </label>
-            &nbsp;
-            <input
-               type="checkbox"
-               value="javascript"
-            />
-         </div>
+      <input onKeyUp={this.props.searchFilter} type="text"/>
+      {listCategories}
+    </div>
 	}
 })
 
