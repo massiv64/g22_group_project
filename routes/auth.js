@@ -1,12 +1,11 @@
 const express = require("express");
-const router = express.Router();
 const passport = require('passport');
+const router = express.Router();
 const authHelpers = require('../helpers/authHelpers');
 const passwordHelpers = require('../helpers/passwordHelpers');
 const knex = require("../db/knex");
 const Promise = require("bluebird");
 var flash = require('express-flash');
-
 
 // Auth routes in main.js
 router.get('/login', function(req, res, next){
@@ -18,14 +17,16 @@ router.get('/signup', authHelpers.preventLoginSignup, function(req, res, next){
 });
 
 router.get('/logout', (req,res) =>{
- req.logout();
- res.redirect('/login');
+
+  req.logout();
+  res.redirect('/auth/login');
 });
 
 router.get('/google', 
   passport.authenticate('google'));
 
-router.get('/auth/google/callback', passport.authenticate('google', {
+
+router.get('/google/callback', passport.authenticate('google', {
   
   successRedirect: '/auth/success',
   failureRedirect: '/signup',
@@ -63,14 +64,11 @@ router.post('/signup', (req, res) => {
     })
   });
 
-
-
 router.post('/login',
   passport.authenticate('local', {
   successRedirect: '/users',
   failureRedirect: '/login'
 }));
-
 
 module.exports = router
 

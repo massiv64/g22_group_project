@@ -13,7 +13,6 @@ router.get("/", authHelpers.ensureAuthenticated, (req,res) => {
   res.render('main/frontpage');
 });
 
-
 router.get('/posts', (req,res) => {
   knex.select("posts.id as post_id", "users.alias", "posts.user_id as user_id", "posts.body", "posts.title").from('posts').join("users", "posts.user_id", "users.id").then((posts) => {
     Promise.map(posts, (p) => {
@@ -25,13 +24,24 @@ router.get('/posts', (req,res) => {
     res.format({
       'application/json':() => {
         res.send(posts)
-      }  
+      }
     })
-    
+
   })
   }).catch(function(err){
     res.render("error", {err})
   })
 });
 
-module.exports = router
+router.get('/categories', (req,res) => {
+  knex('categories').then(categories => {
+    res.format({
+      'application/json':() => {
+        res.send(categories)
+      }
+  })
+})
+})
+
+
+module.exports = router;

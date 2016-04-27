@@ -4,7 +4,7 @@ const authMiddleware  = {
     if (!req.user){
       req.session.flash = {}
       req.flash('loginMessage', "Please log in first")
-      return res.redirect('/login');
+      return res.redirect('auth/login');
     }
     else {
       return next();

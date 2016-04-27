@@ -25,6 +25,10 @@
   margin: 10px 0;
   width: 250px;
 }
+.categoryDropdown label, .categoryDropdown input {
+  padding: 15px;
+}
+
 #reset{
   position:relative;
   left:260px;
@@ -78,10 +82,10 @@
   margin-left: 8vw;
 }
 
-.commentAuthor {
-  color: rgba(255,102,102,0.8);
+.commentAuthor, .postAuthor {
+  color: rgba(255,50,102,1);
   font-size: 12px;
-  font-family: "Times New Roman", Georgia, Serif; 
+  font-family: "Times New Roman", Georgia, Serif;
 }
 
 .icon {

@@ -27,5 +27,12 @@ router.get('/:id', (req,res) => {
   });
 });
 
+router.delete('/:id', function(req,res,next){
+  knex('users').where('id', req.user.id).del().then(() => {
+    req.logout();
+    res.redirect('/auth/login');
+  })
+})
+
 
 module.exports = router;
