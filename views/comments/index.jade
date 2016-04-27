@@ -9,6 +9,6 @@ block content
         pre
           !{comment.content}
         a(href="/posts/#{post.id}/comments/#{comment.id}/edit") 
-          button(class="btn btn-primary btn-sm") Edit this post
+          button(class="btn btn-primary btn-sm") Edit this comment
         form(action="/posts/#{post.id}/comments/#{comment.id}?_method=DELETE" method="POST" class="deleteBtn")
           input(type="submit" value="X" class="btn btn-sm btn-danger")
