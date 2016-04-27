@@ -56,16 +56,23 @@ router.get('/:id/edit', (req,res) => {
 });
 
 router.post('/', (req,res) => {
-  knex.insert(req.body.post, "*").into('posts').then((post) =>{
-    knex('posts').where({id: post[0].id}).update({user_id: req.params.user_id})
-      .then(function(){
-            res.redirect(`/users/${req.params.user_id}/posts`);
-          })
+  var user_id = req.params.user_id;
+  var categories = req.body.category;
+  var newPost = Object.assign(req.body.post, {user_id})
+  knex('posts').insert(newPost).returning("*").then((post) =>{
+    var post_id = post[0].id;
+    for (var c in categories) {
+      knex('categories').where('technology', c).first().then(category => {
+        var newCategory = Object.assign({}, {category_id: category.id}, {post_id});
+        knex('category_posts').insert(newCategory).then(()=>{
+        });
+      }); 
+    }
+    res.redirect(`/users/${req.params.user_id}/posts`);;
   });
 });
 
 router.patch('/:id', (req,res) => {
-
   knex('posts').update(req.body.post, "*").where({id:req.params.id}).then((post) =>{
     res.redirect(`/users/${post[0].user_id}/posts`)
   }).catch((err) =>{
