@@ -6,7 +6,8 @@ block content
   ul
     each comment in comments
       .container.bodyDiv
-        !{comment.content}
+        pre
+          !{comment.content}
         a(href="/posts/#{post.id}/comments/#{comment.id}/edit") 
           button(class="btn btn-primary btn-sm") Edit this post
         form(action="/posts/#{post.id}/comments/#{comment.id}?_method=DELETE" method="POST" class="deleteBtn")

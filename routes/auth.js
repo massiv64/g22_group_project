@@ -6,6 +6,7 @@ const passwordHelpers = require('../helpers/passwordHelpers');
 const knex = require("../db/knex");
 const Promise = require("bluebird");
 var flash = require('express-flash');
+const LocalStrategy = require('passport-local').Strategy;
 
 // Auth routes in main.js
 router.get('/login', function(req, res, next){
@@ -73,7 +74,7 @@ router.post('/signup', (req, res) => {
 router.post('/login',
   passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/auth/login'
 }));
 
 module.exports = router

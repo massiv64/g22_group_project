@@ -7,6 +7,7 @@ var Page = React.createClass({
       return {
          posts: [],
          categories: [],
+         filters: [],
       };
    },
    updatePosts: function updatePosts() {
@@ -18,6 +19,7 @@ var Page = React.createClass({
          posts: this.state.posts
       });
    },
+   // Filters according to content in the search bar
    searchFilter: function searchFilter(e){
      var search = e.target.value.toLowerCase();
      var filtered;
@@ -28,6 +30,37 @@ var Page = React.createClass({
        this.setState({posts: filtered})
       }.bind(this))
       );
+   },
+   // Filters posts by selected categories
+   categoryFilter: function categoryFilter(e){
+     var category = e.target.value;
+     var idx = this.state.filters.indexOf(category);
+     var filtered = [];
+     if(e.target.checked){
+       if(idx < 0){
+        this.state.filters.push(category)
+       }
+     }
+     else{
+       if(idx > -1){
+         this.state.filters.splice(idx, 1);
+       }
+     }
+     $.getJSON('/posts').then((function(posts){
+       var filtered = posts;
+       this.state.posts.forEach(function (val, index){
+         for(var i=0;i<this.state.filters.length;i++){
+           if (this.state.filters[i] === val){
+             filtered.push(val);
+           }
+           if (this.state.filters[i] !== val){
+             filtered.splice(filtered.indexOf(val), 1);
+           }
+         }
+       }.bind(this))
+        this.setState({posts: filtered})
+     }.bind(this))
+     );
    },
    componentWillMount: function componentWillMount() {
       $.getJSON("/posts").then((function (posts) {
@@ -57,9 +90,10 @@ var Page = React.createClass({
       });
       return (
       <div>
-         <h2>Front Page</h2>
+         <h2>Welcome to the Stack App</h2>
          <MenuBox
             searchFilter={this.searchFilter}
+            categoryFilter={this.categoryFilter}
             categories={this.state.categories}
           />
          {listPosts}
@@ -89,13 +123,13 @@ var Checkbox = React.createClass({
   render: function(){
     return (
       <div>
-        <label> {this.props.technology} </label>
-        &nbsp;
         <input
           id={"check" + this.props.id}
           type="checkbox"
           value={this.props.technology}
+          onClick={this.props.filter}
         />
+        <label htmlFor={"check" + this.props.id}> {this.props.technology} </label>
         <br/>
       </div>
     )
@@ -104,12 +138,14 @@ var Checkbox = React.createClass({
 
 var MenuBox = React.createClass({
   render: function () {
+    var filter = this.props.categoryFilter;
     var listCategories = this.props.categories.map(function(v, i) {
       return (
-        <div className ="checkbox" id={i}>
+        <div className ="checkbox" key={i}>
           <Checkbox
             id={"check" + v.id}
             technology={v.technology}
+            filter={filter}
           />
         </div>
       )
