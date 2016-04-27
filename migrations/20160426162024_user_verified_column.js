@@ -1,4 +1,3 @@
-
 exports.up = function(knex, Promise) {
   return knex.schema.table('users', function(t){
     t.boolean('is_verified');
