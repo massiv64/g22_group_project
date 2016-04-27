@@ -24,13 +24,24 @@ router.get('/posts', (req,res) => {
     res.format({
       'application/json':() => {
         res.send(posts)
-      }  
+      }
     })
-    
+
   })
   }).catch(function(err){
     res.render("error", {err})
   })
 });
 
-module.exports = router
+router.get('/categories', (req,res) => {
+  knex('categories').then(categories => {
+    res.format({
+      'application/json':() => {
+        res.send(categories)
+      }
+  })
+})
+})
+
+
+module.exports = router;
