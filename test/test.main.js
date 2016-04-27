@@ -5,7 +5,6 @@ const expect = require('chai').expect;
 const knex = require('../db/knex');
 const app = require('../app');
 
-
 describe('GET /', () => {
   it('responds', done => {
     request(app)
