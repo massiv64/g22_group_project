@@ -83,7 +83,7 @@ router.patch('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   });
 });
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex('posts').where({id:req.params.id}).first().del().then(() =>{
       res.redirect(`/users/${req.params.user_id}/posts`);
   }).catch((err) =>{
