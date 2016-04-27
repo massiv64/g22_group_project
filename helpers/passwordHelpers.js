@@ -34,11 +34,19 @@ exports.createUser = (req)=> {
 
 exports.editUser = (req)=> {
       const salt = bcrypt.genSaltSync();
-      return knex('users').where({id: req.params.id}).update({
-        email: req.body.user.email,
-        alias: req.body.user.alias,
-        photo: req.body.user.photo,
-      }, "*");
+      const hash = bcrypt.hashSync(req.body.user.password, salt)
+
+     return   knex('users').where({id:req.session.passport.user}).update({
+          email: req.body.user.email,
+          alias: req.body.user.alias,
+          photo: req.body.user.photo,
+          password: hash, 
+        }, '*')
+  
+      // return knex('users').where({id: req.params.id}).update({
+
+      //   password: hash
+      // }, "*");
 },
 
 exports.comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);
