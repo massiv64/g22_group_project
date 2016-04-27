@@ -7,6 +7,14 @@ const app = require('../app');
 
 
 beforeEach(done => {
+  console.log('beforeEach')
+  done();
+})
+
+afterEach(done =>{
+  console.log('afterEach')
+  done();
+})
   //any test in the before
     //some users posts, comments, categories,
     //expect all of those componest 
@@ -27,7 +35,7 @@ beforeEach(done => {
       //need to figure out how to apply to all of our valide routes
         .get('/account') 
         .expect('Content-Type', /html/)
-        .expect(200, done);
+        .expect(200,done);
     });
 
   });
@@ -47,7 +55,4 @@ beforeEach(done => {
 
 
 
-  console.log("running a beforeEach!");
-});
-
-afterEach(done =>  done());
+// afterEach(done =>  done());

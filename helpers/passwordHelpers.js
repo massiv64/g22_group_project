@@ -33,14 +33,29 @@ exports.createUser = (req)=> {
     })
 },
 
-exports.editUser = (req)=> {
+exports.editUser = (req, res, done)=> {
       const salt = bcrypt.genSaltSync();
-
-      return knex('users').where({id: req.params.id}).update({
-        email: req.body.user.email,
+      const hash = bcrypt.hashSync(req.body.user.password, salt)
+      if(req.user.token){ 
+        knex('users').where('id', +req.user.id).first().update({
+        is_verified: true,
+        email:req.body.user.email,
         alias: req.body.user.alias,
         photo: req.body.user.photo,
-      }, "*");
-},
+        password: hash,
+      }).then(function(){
+        return done()
+       })
+      } else {
+        knex('users').where({id: req.body.user.id}).first().update({
+        password: hash,
+        email: req.body.user.email,
+        photo: req.body.user.photo,
+        alias: req.body.user.alias,
+      }).then(function(){
+        return done()
+      })
+    }
+  }
 
 exports.comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);

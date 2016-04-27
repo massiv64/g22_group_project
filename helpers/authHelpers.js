@@ -26,11 +26,12 @@ const authMiddleware  = {
      return next();
     }
   },
+  //should ensure only the current user can edit/update posts that pertain to their id - nicarooni	
   ensureCorrectUserForEdit(req,res,next){
   	if (+req.params.id === req.user.id){
   		return next()
   	} else {
-  		res.redirect('#')
+  		res.redirect('/users/:user_id/posts/:post_id')
   	}
   },
   currentUser(req, res, next) {
