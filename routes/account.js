@@ -10,7 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 const SALT_WORK_FACTOR = 10;
 
-// router.use(passwordHelpers.editUser);
+
 router.use(authHelpers.currentUser);
 router.use(authHelpers.ensureAuthenticated)
 
@@ -36,17 +36,10 @@ router.put('/',(req,res) => {
           password: hash, 
         }, '*').then(function(){
     res.redirect('/account')
-  })
-});
-
-    })
-  })
-
-router.delete('/', function(req,res,next){
-  knex('users').where('id', +req.user.id).first().del().then(() => {
-    req.session = null;
-    res.redirect('/');
+      })
+    });
   })
 })
+
 
 module.exports = router;

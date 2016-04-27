@@ -28,6 +28,7 @@ require('./helpers/passport.js')(passport);
 
 app.use(helpers.currentUser);
 app.use('/', routes.main);
+app.use('/auth', routes.auth);
 app.use('/users', routes.users);
 app.use('/account', routes.account);
 app.use('/users/:user_id/posts', routes.posts);

@@ -22,19 +22,15 @@ body
                 span.icon-bar
           a.navbar-brand(href="/") Stack App
             //- the form should go through all of the posts
-        .collapse.navbar-collapse   
-          form.navbar-form.navbar-left(role='Search' action='/users/posts' method="GET")
-              input.form-group(type='text' placeholder="Search")
+        .collapse.navbar-collapse#navbar-inverse
           ul.nav.navbar-nav.navbar-right 
             li.dropdown
-                a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false") 
-                  span.glyphicon.glyphicon-menu-hamburger(aria-hidden="true")
-                ul.dropdown-menu( role="menu" )
-                    li: a( href="/account" ) Profile
-                    li: a( href="/users/#{currentUser.id}/posts/new" ) Add Post
-                    li.divider
-                    li: a( href="/account/edit" ) Account Settings
-                    li: a( href="/logout" ) Logout 
+              li: a( href="/account" ) Profile
+              li: a( href="/users/#{currentUser.id}/posts/new" ) Add Post
+              li: a( href="/users") See All Users
+              li.divider
+              li: a( href="/account/edit" ) Account Settings
+              li: a( href="/auth/logout" ) Logout 
     div.container
       script(src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
       script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
