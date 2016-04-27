@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  .col-sm-6.col-sm-offset-3
+  .col-sm-6.col-sm-offset-3.loginDiv
     h1
       span.fa.fa-sign-in
       |  Login
@@ -13,13 +13,12 @@ block content
         label Password
         input.form-control(type='password', name='user[password]' autocomplete="off")
       button.btn.btn-warning.btn-md(type='submit') Login
-  br
-  #container.signup
-    h3 Sign up 
-    a(href="/auth/signup") 
-      button(class="btn btn-primary") Click here to sign up
-    h3 Or, login with Google:
-    div
-      a(href="/auth/google")
-        i(class="fa fa-google fa-2x google" aria-hidden="true") &nbsp; Google
+    #container.signup
+      h3 Sign up 
+      a(href="/auth/signup") 
+        button(class="btn btn-primary") Click here to sign up
+      h3 Or, login with Google:
+      div
+        a(href="/auth/google")
+          i(class="fa fa-google fa-2x google" aria-hidden="true") &nbsp; Google
 

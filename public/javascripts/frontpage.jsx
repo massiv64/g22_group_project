@@ -89,13 +89,12 @@ var Checkbox = React.createClass({
   render: function(){
     return (
       <div>
-        <label> {this.props.technology} </label>
-        &nbsp;
         <input
           id={"check" + this.props.id}
           type="checkbox"
           value={this.props.technology}
         />
+        <label htmlFor={"check" + this.props.id}> {this.props.technology} </label>
         <br/>
       </div>
     )
