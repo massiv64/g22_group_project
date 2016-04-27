@@ -62,7 +62,7 @@ router.post('/signup', (req, res) => {
       }
       if(err) {
         req.flash('loginMessage', err.message)
-        res.redirect('/signup');
+        res.redirect('/auth/signup');
       }
       else {
         res.render('error', {err})
