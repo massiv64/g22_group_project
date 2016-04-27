@@ -32,21 +32,10 @@ router.get('/:id', (req,res) => {
   });
 });
 
-
 router.get('/:id/edit', authHelpers.ensureCorrectUserForEditComments, (req,res) => {
-  // eval(require('locus'))
-  // knex('comments').where({id: req.params.id}).first().then((comment) =>{
-  //   knex('posts').where({id: comment.post_id}).first().then((post) => {
-router.get('/:id/edit', (req,res) => {
-  knex('comments').where({id: req.params.id}).first().then((comment) =>{
-    knex('posts').where({id: comment.post_id}).first().then((post) => {
-      res.render("comments/edit", {post,comment})
-    }).catch((err) =>{
-    res.render("error", {err})
-  });
+        res.render("comments/edit")
 
-
-
+});
 
 
 
@@ -60,7 +49,8 @@ router.post('/', (req,res) => {
     });
 });
 
-router.patch('/:id',  (req,res) => {
+
+router.patch('/:id', (req,res) => {
   knex('comments').where({id:req.params.id}).update(req.body.comment).then(() =>{
     res.redirect(`/posts/${req.params.post_id}/comments`)
   }).catch((err) =>{
@@ -68,7 +58,7 @@ router.patch('/:id',  (req,res) => {
   });
 });
 
-router.delete('/:id', authHelpers.ensureCorrectUserForEditComments, (req,res) => {
+router.delete('/:id',authHelpers.ensureCorrectUserForEditComments, (req,res) => {
   knex('comments').where({id:req.params.id}).returning("*").first().del().then((post) =>{
     res.redirect(`/posts/${req.params.post_id}/comments`)
   }).catch((err) =>{
