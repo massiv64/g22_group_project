@@ -31,6 +31,4 @@ router.put('/', passwordHelpers.editUser, (req,res) => {
       res.redirect('/account')
     });
 
-
-
 module.exports = router;
