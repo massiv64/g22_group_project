@@ -22,12 +22,12 @@ router.get('/logout', (req,res) =>{
   res.redirect('/auth/login');
 });
 
-router.get('/google', 
+router.get('/google',
   passport.authenticate('google'));
 
 
 router.get('/google/callback', passport.authenticate('google', {
-  
+
   successRedirect: '/auth/success',
   failureRedirect: '/signup',
 
@@ -38,7 +38,7 @@ router.get('/success', (req, res) => {
   if(req.user.is_verified === false){
       res.redirect('/account/edit');
       //the account PUT route will handle the logic to turn is_verified to TRUE
-      
+
   }
   res.redirect('/')
 
@@ -72,9 +72,8 @@ router.post('/signup', (req, res) => {
 
 router.post('/login',
   passport.authenticate('local', {
-  successRedirect: '/users',
+  successRedirect: '/',
   failureRedirect: '/login'
 }));
 
 module.exports = router
-
