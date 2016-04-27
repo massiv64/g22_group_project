@@ -28,12 +28,14 @@ exports.createUser = (req)=> {
       return knex('users').insert({
         email: req.body.user.email,
         password:hash,
+        is_verified: false
       }, "*")
     })
 },
 
 exports.editUser = (req)=> {
       const salt = bcrypt.genSaltSync();
+
       return knex('users').where({id: req.params.id}).update({
         email: req.body.user.email,
         alias: req.body.user.alias,

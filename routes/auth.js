@@ -17,6 +17,7 @@ router.get('/signup', authHelpers.preventLoginSignup, function(req, res, next){
 });
 
 router.get('/logout', (req,res) =>{
+
   req.logout();
   res.redirect('/auth/login');
 });
@@ -24,10 +25,27 @@ router.get('/logout', (req,res) =>{
 router.get('/google', 
   passport.authenticate('google'));
 
+
 router.get('/google/callback', passport.authenticate('google', {
-  successRedirect: '/account/edit',
+  
+  successRedirect: '/auth/success',
   failureRedirect: '/signup',
+
 }));
+
+
+router.get('/success', (req, res) => {
+  if(req.user.is_verified === false){
+      res.redirect('/account/edit');
+      //the account PUT route will handle the logic to turn is_verified to TRUE
+      
+  }
+  res.redirect('/')
+
+
+});
+
+
 
 //signing up
 router.post('/signup', (req, res) => {
@@ -59,3 +77,4 @@ router.post('/login',
 }));
 
 module.exports = router
+
