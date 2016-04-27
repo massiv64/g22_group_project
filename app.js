@@ -14,6 +14,7 @@ const helpers = require('./helpers/authHelpers')
 if (app.get('env') === 'development') {
   require('dotenv').load();
 }
+
 app.set("view engine", "jade");
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("tiny"))
