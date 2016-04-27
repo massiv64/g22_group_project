@@ -55,7 +55,6 @@ var Page = React.createClass({
             </div>
           )
       });
-      debugger
       return (
       <div>
          <h2>Front Page</h2>
@@ -105,7 +104,6 @@ var Checkbox = React.createClass({
 
 var MenuBox = React.createClass({
   render: function () {
-    debugger
     var listCategories = this.props.categories.map(function(v, i) {
       return (
         <div className ="checkbox" id={i}>
