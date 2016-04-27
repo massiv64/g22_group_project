@@ -8,9 +8,9 @@ block content
     .inputGroup
       button(id="reset") Reset Form
       h5 Alias
-      input(id="aliasInput", type="text" name="user[alias]",  placeholder="What should we call you?")
+      input(id="aliasInput", type="text" name="user[alias]",  placeholder="What should we call you?" autocomplete="off")
       h5 Profile Photo
-      input(id="photoInput", type="text" name="user[photo]", placeholder="Link to a photo")
+      input(id="photoInput", type="text" name="user[photo]", placeholder="Link to a photo" autocomplete="off")
       h5 Password
       input(id="passwordInput", type="password", name="user[password]", placeholder="Update your password" autocomplete="off")
       input(type="submit" value="submit" id="submit")
