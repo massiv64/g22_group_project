@@ -47,7 +47,7 @@ exports.editUser = (req, res, done)=> {
         return done()
        })
       } else {
-        knex('users').where({id: req.body.user.id}).first.update({
+        knex('users').where({id: req.body.user.id}).first().update({
         password: hash,
         email: req.body.user.email,
         photo: req.body.user.photo,
