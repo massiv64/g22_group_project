@@ -6,13 +6,13 @@ const _ = require("lodash")
 const markdown = require('markdown').markdown;
 
 
-//should show all of the comments associated to that post along withe comment 
+//should show all of the comments associated to that post along withe comment
 
 router.get('/', (req,res) => {
   knex('posts').where({user_id: req.params.user_id}).then((posts) =>{
         knex('users').where({id: req.params.user_id}).first().then((user) => {
           posts.forEach(function(val,index) {
-            val.body = markdown.toHTML(val.body) 
+            val.body = markdown.toHTML(val.body)
           });
           res.render("posts/index", {posts,user})
         })
@@ -23,7 +23,9 @@ router.get('/', (req,res) => {
 
 router.get('/new', (req,res) => {
   knex('users').where({id: req.params.user_id}).first().then((user) => {
-      res.render("posts/new", {user})
+    knex('categories').then(categories => {
+      res.render("posts/new", {user, categories})
+    })
   })
 })
 
@@ -40,7 +42,7 @@ router.get('/:id', (req,res) => {
           val.content = markdown.toHTML(val.content);
         });
         post.body = markdown.toHTML(post.body)
-        res.render("posts/show", {post, comments, user})  
+        res.render("posts/show", {post, comments, user})
       })
     })
   });
