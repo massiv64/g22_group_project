@@ -38,6 +38,7 @@ router.get('/success', (req, res) => {
   if(req.user.is_verified === false){
       res.redirect('/account/edit');
       //the account PUT route will handle the logic to turn is_verified to TRUE
+      
   }
   res.redirect('/')
 
