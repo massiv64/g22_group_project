@@ -25,6 +25,11 @@ router.get('/edit', function(req, res){
 })
 
 router.put('/', (req,res) => {
+  if(req.user.token){
+  knex('users').where('id', +req.user.id).first().update({is_verified: true}).then(function(){
+   })
+  }
+
   knex('users').where('id', +req.user.id).first().update(req.body.user).then(function(){
     res.redirect('/account')
   })

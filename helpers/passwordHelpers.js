@@ -27,7 +27,8 @@ exports.createUser = (req)=> {
       const hash = bcrypt.hashSync(req.body.user.password, salt);
       return knex('users').insert({
         email: req.body.user.email,
-        password:hash
+        password:hash,
+        is_verified: false
       }, "*")
     })
 },
