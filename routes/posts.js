@@ -4,6 +4,7 @@ const knex = require("../db/knex")
 const Promise = require("bluebird")
 const _ = require("lodash")
 const markdown = require('markdown').markdown;
+const authHelpers = require ('../helpers/authHelpers')
 
 
 //should show all of the comments associated to that post along withe comment
@@ -49,23 +50,30 @@ router.get('/:id', (req,res) => {
 });
 
 
-router.get('/:id/edit', (req,res) => {
+router.get('/:id/edit', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex.select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias").from('posts').where({"posts.id": req.params.id}).join("users", "posts.user_id","users.id").first().then((post) => {
       res.render("posts/edit", {post})
     })
 });
 
 router.post('/', (req,res) => {
-  knex.insert(req.body.post, "*").into('posts').then((post) =>{
-    knex('posts').where({id: post[0].id}).update({user_id: req.params.user_id})
-      .then(function(){
-            res.redirect(`/users/${req.params.user_id}/posts`);
-          })
+  var user_id = req.params.user_id;
+  var categories = req.body.category;
+  var newPost = Object.assign(req.body.post, {user_id})
+  knex('posts').insert(newPost).returning("*").then((post) =>{
+    var post_id = post[0].id;
+    for (var c in categories) {
+      knex('categories').where('technology', c).first().then(category => {
+        var newCategory = Object.assign({}, {category_id: category.id}, {post_id});
+        knex('category_posts').insert(newCategory).then(()=>{
+        });
+      }); 
+    }
+    res.redirect(`/users/${req.params.user_id}/posts`);;
   });
 });
 
-router.patch('/:id', (req,res) => {
-
+router.patch('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex('posts').update(req.body.post, "*").where({id:req.params.id}).then((post) =>{
     res.redirect(`/users/${post[0].user_id}/posts`)
   }).catch((err) =>{

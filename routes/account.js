@@ -8,6 +8,8 @@ const authHelpers = require('../helpers/authHelpers');
 const passwordHelpers = require('../helpers/passwordHelpers');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
+const SALT_WORK_FACTOR = 10;
+
 
 router.use(authHelpers.currentUser);
 router.use(authHelpers.ensureAuthenticated)
@@ -24,15 +26,9 @@ router.get('/edit', function(req, res){
 	})
 })
 
-router.put('/', (req,res) => {
-  if(req.user.token){
-  knex('users').where('id', +req.user.id).first().update({is_verified: true}).then(function(){
-   })
-  }
 
-  knex('users').where('id', +req.user.id).first().update(req.body.user).then(function(){
-    res.redirect('/account')
-  })
-});
+router.put('/', passwordHelpers.editUser, (req,res) => {
+      res.redirect('/account')
+    });
 
 module.exports = router;
