@@ -3,6 +3,23 @@
   margin-right: 0;
 }
 
+label {
+  display: inline-block;
+  padding: 0;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+  margin: 7px 0 0 0;
+}
+
+.loginSignUpDiv {
+  border: 5px solid rgba(100,100,100,0.5);
+  position: absolute;
+  border-radius: 10px;
+  padding: 20px;
+  top: 15vh;
+}
+
 .tile {
   border-top: 2px;
   border-color: gray;
@@ -114,6 +131,14 @@ a:hover {
 .profilePhoto {
   max-height: 200px;
 }
+
+.profileDiv {
+  width: 100%;
+  border: 2px solid black;
+  padding: 10px;
+
+}
+
 .thumb {
   max-height:40px;
 }

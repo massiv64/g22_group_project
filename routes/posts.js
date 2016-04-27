@@ -49,11 +49,13 @@ router.get('/:id', (req,res) => {
   });
 });
 
-
 router.get('/:id/edit', authHelpers.ensureCorrectUserForEdit, (req,res) => {
-  knex.select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias").from('posts').where({"posts.id": req.params.id}).join("users", "posts.user_id","users.id").first().then((post) => {
-      res.render("posts/edit", {post})
-    })
+  knex('posts').select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias")
+  .join("users", "posts.user_id","users.id")
+  .first()
+  .then((post) => {
+    res.render("posts/edit", {post})
+  })
 });
 
 router.post('/', (req,res) => {
@@ -81,7 +83,7 @@ router.patch('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   });
 });
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex('posts').where({id:req.params.id}).first().del().then(() =>{
       res.redirect(`/users/${req.params.user_id}/posts`);
   }).catch((err) =>{

@@ -16,7 +16,9 @@ router.use(authHelpers.ensureAuthenticated)
 
 router.get('/', function(req, res){
 	knex('users').where('id', req.user.id).then(function(user){
-		res.render('account/show', {user: req.user});
+    knex('posts').where('user_id', req.user.id).then(function(posts) {
+      res.render('account/show', {user: req.user, posts});  
+    })
 	})
 })
 
