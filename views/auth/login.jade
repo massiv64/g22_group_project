@@ -1,24 +1,14 @@
 extends ../layout
 
 block content
+  #cover
   .col-sm-6.col-sm-offset-3.loginSignUpDiv
-    h1
-      span.fa.fa-sign-in
-      |  Login
-    form(action='/auth/login', method='post')
-      .form-group
-        label Email
-        input.form-control(type='text', name='user[username]')
-      .form-group
-        label Password
-        input.form-control(type='password', name='user[password]' autocomplete="off")
-      button.btn.btn-warning.btn-md(type='submit') Login
-    #container.signup
-      h3 Sign up 
-      a(href="/auth/signup") 
-        button(class="btn btn-primary") Click here to sign up
-      h3 Or, login with Google:
-      div
-        a(href="/auth/google")
-          i(class="fa fa-google fa-2x google" aria-hidden="true") &nbsp; Google
+    div
+      h2 About This App:
+      p(class="content") We developed this application in light of a need for tech students to have easy access to a comprehensive bug list.
+    h3 Login / Sign Up with Google:
+    div
+      a(href="/auth/google")
+        i(class="fa fa-google fa-4x google" aria-hidden="true") &nbsp; Google
+
 
