@@ -29,8 +29,7 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    eval(require('locus'))
-    res.json(posts)
+    res.send(posts)
   }).catch(function(err){
       res.render("error", {err})
   })
