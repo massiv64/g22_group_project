@@ -17,7 +17,14 @@ router.use(authHelpers.ensureAuthenticated)
 router.get('/', function(req, res){
 	knex('users').where('id', req.user.id).then(function(user){
     knex('posts').where('user_id', req.user.id).then(function(posts) {
-      res.render('account/show', {user: req.user, posts});  
+			res.format({
+  			html: function(){
+    			res.render('account/show', {user: req.user, posts: posts});
+  			},
+  			json: function(){
+    			res.json({user: req.user});
+  			}
+			});
     })
 	})
 })
@@ -36,7 +43,7 @@ router.put('/', (req,res) => {
         photo: req.body.user.photo,
       }).then(function(){
         res.redirect('/account')
-        
+
       })
 
 });

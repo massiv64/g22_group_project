@@ -262,6 +262,9 @@ a:hover {
   bottom: 29px;
 }
 
+.CodeMirror, .CodeMirror-scroll {
+  max-height: 100px;
+}
 
 .bodyStyle{
   background-color: #66CDAA;
@@ -280,4 +283,3 @@ a:hover {
   border: 2px solid black;
   border-radius: 10px;
 }
-
