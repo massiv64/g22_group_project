@@ -89,7 +89,7 @@ var Page = React.createClass({
           )
       });
       return (
-      <div>
+      <div className="container">
          <h2>Welcome to the Stack App</h2>
          <MenuBox
             searchFilter={this.searchFilter}

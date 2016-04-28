@@ -31,23 +31,54 @@ router.get('/new', authHelpers.ensureCorrectUserForNewPost,(req,res) => {
 })
 
 router.get('/:id', (req,res) => {
-  knex('posts').where({id: req.params.id}).first().then((post) =>{
-    knex('users').where({id: req.params.user_id}).first().then( user => {
-      knex('comments as c')
-      .select('c.id as cid', 'c.content', 'c.post_id as pid', 'u.id as uid', 'u.alias as alias', 'u.photo as photo')
-      .leftOuterJoin('users as u', 'c.user_id', 'u.id')
-      .where('c.post_id', req.params.id)
-      .orderBy('c.id')
-      .then(comments => {
-        comments.forEach(val => {
-          val.content = markdown.toHTML(val.content);
-        });
-        post.body = markdown.toHTML(post.body)
-        res.render("posts/show", {post, comments, user})
+  res.format({
+    html: function(){
+      res.render('posts/react', {user:req.user});
+    },
+
+    json: function(){
+      knex('posts').where('id', req.params.id).first().then((post) =>{
+        knex('users').where('id', post.user_id).first().then((post_author) => {
+          knex('comments').where('post_id', post.id).orderBy('id', 'desc').then((comments) => {
+            knex('category_posts').where('post_id', post.id).then((category_relations) =>{
+              knex('categories').where('id', category_relations.category_id).then((categories) =>{
+                post.body = markdown.toHTML(post.body);
+                comments.forEach(function(val, index){
+                  val.content = markdown.toHTML(val.content);
+                })
+                res.json({post: post, post_author:post_author, categories:categories, comments:comments});
+              })
+            })
+          })
+        })
       })
-    })
+    }
   });
-});
+
+
+})
+
+
+
+
+// router.get('/:id', (req,res) => {
+//   knex('posts').where({id: req.params.id}).first().then((post) =>{
+//     knex('users').where({id: req.params.user_id}).first().then( user => {
+//       knex('comments as c')
+//       .select('c.id as cid', 'c.content', 'c.post_id as pid', 'u.id as uid', 'u.alias as alias', 'u.photo as photo')
+//       .leftOuterJoin('users as u', 'c.user_id', 'u.id')
+//       .where('c.post_id', req.params.id)
+//       .orderBy('c.id')
+//       .then(comments => {
+//         comments.forEach(val => {
+//           val.content = markdown.toHTML(val.content);
+//         });
+//         post.body = markdown.toHTML(post.body)
+//         res.render("posts/show", {post, comments, user})
+//       })
+//     })
+//   });
+// });
 
 router.get('/:id/edit', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex('posts').select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias")
@@ -70,7 +101,7 @@ router.post('/', (req,res) => {
         var newCategory = Object.assign({}, {category_id: category.id}, {post_id});
         knex('category_posts').insert(newCategory).then(()=>{
         });
-      }); 
+      });
     }
     res.redirect(`/users/${req.params.user_id}/posts`);;
   });

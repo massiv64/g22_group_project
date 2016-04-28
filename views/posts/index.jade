@@ -1,18 +1,19 @@
 extends ../layout
 
 block content
+<<<<<<< HEAD
   .container
     h1(class="lead") See #{user.alias}'s posts
 
+=======
+  .col-sm-6.col-sm-offset-2.profileDiv
+    h1=user.alias
+    img(class="profilePhoto" src="#{user.photo}")
+    
+    h3 See #{user.alias}'s posts
+>>>>>>> af8bae8b6e554c4ebfb75f9a81128060faf55b27
     each post in posts
-      .panel.panel-default.panel-info
-        .panel-heading 
-          a(href="/users/#{post.user_id}/posts/#{post.id}") #{post.title}
-        .panel-body 
-          !{post.body}
-        a(href="/posts/#{post.id}/comments") 
-          button(class="btn btn-primary btn-sm") See all the comments for this post
-        a(href="/users/#{user.id}/posts/#{post.id}/edit") 
-          button(class="btn btn-primary btn-sm") Edit this post
-        form(action="/users/#{user.id}/posts/#{post.id}?_method=DELETE" method="POST" class="deleteBtn")
-          input(type="submit" value="X" class="btn btn-sm btn-danger")
+      .accountTile
+        a(href="/users/#{post.user_id}/posts/#{post.id}") 
+          h3 #{post.title}
+          
