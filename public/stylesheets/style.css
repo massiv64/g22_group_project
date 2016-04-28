@@ -224,3 +224,6 @@ a:hover {
   bottom: 29px;
 }
 
+.CodeMirror, .CodeMirror-scroll {
+  max-height: 100px;
+}
