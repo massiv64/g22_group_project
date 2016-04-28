@@ -38,11 +38,10 @@ router.get('/posts', (req,res) => {
 })
 
 router.get('/testing', (req,res) => {
-  // Chris's code
   knex('posts as p').select('p.id as post_id', 'u.alias', 'p.user_id as user_id', 'p.title', 'p.body', 'cp.category_id', 'c.technology')
-  .join('users as u', 'p.user_id', 'u.id')
-  .join('category_posts as cp', 'p.id', 'cp.post_id')
-  .join('categories as c', 'cp.category_id', 'c.id')
+  .leftOuterJoin('users as u', 'p.user_id', 'u.id')
+  .leftOuterJoin('category_posts as cp', 'p.id', 'cp.post_id')
+  .leftOuterJoin('categories as c', 'cp.category_id', 'c.id')
   .then(posts => {
     console.log(posts, 'this is before reduce');
     posts = posts.reduce((prev, next) => {
@@ -63,8 +62,8 @@ router.get('/testing', (req,res) => {
 
 router.get('/categories', (req,res) => {
   knex('categories').then(categories => {
-        res.json(categories)
-      })
+    res.json(categories)
+  })
 })
 
 
