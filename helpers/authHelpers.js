@@ -29,7 +29,6 @@ const authMiddleware  = {
   	}
   },
   ensureCorrectUserForEditComments(req,res,next){
-
     var post_id = req.params.post_id
 
     knex('comments').where({id: req.params.id}).first().then((comment) =>{
@@ -44,7 +43,6 @@ const authMiddleware  = {
       }
       })
     })
-
   },
   currentUser(req, res, next) {
     // if the user is authenticated (passport method returns true when serialized)

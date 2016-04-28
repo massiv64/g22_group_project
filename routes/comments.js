@@ -39,8 +39,6 @@ router.get('/:id/edit', authHelpers.ensureCorrectUserForEditComments, (req,res) 
 
 
 
-
-
 //old post route
 router.post('/', (req,res) => {
   knex.insert(req.body.comment, "*").into('comments').then((comment) =>{
@@ -50,6 +48,7 @@ router.post('/', (req,res) => {
       })
     });
 });
+
 
 router.patch('/:id', (req,res) => {
   knex('comments').where({id:req.params.id}).update(req.body.comment).then(() =>{
