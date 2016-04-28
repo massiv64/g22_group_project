@@ -21,9 +21,6 @@ module.exports = (passport) => {
     knex('users').where('email', profile._json.emails[0].value).first().then(user=> {
       let photoString = profile.photos[0].value;
       let updatedPhoto = photoString.substring(0, photoString.length -6 )
-
-      eval(require("locus"))
-
       if(user){
         //does this person w/ a registered email have a Google token?
         knex('users').where('token', profile.id).first().then(foundUser => {
