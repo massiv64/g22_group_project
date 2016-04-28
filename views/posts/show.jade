@@ -19,6 +19,8 @@ block content
           .commentBody
             !{comment.content} 
             p(class="commentAuthor") Commented by #{comment.alias}
+            a(href="/") Edit Comment
+            a()  Delete Comment
     a(href="/posts/#{post.id}/comments/new" class="newBtn") 
       button(class="btn btn-primary btn-sm") Add a Comment
   script(src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js")
