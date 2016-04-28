@@ -36,7 +36,7 @@ router.get('/posts', (req,res) => {
 })
 
 router.get('/testing', (req,res) => {
-  knex('posts as p').select('p.id as post_id', 'u.alias', 'p.user_id as user_id', 'p.title', 'p.body', 'cp.category_id', 'c.technology')
+  knex('posts as p').select('p.id as post_id', 'u.alias', 'p.user_id as user_id', 'p.title', 'p.body')
   .join('users as u', 'p.user_id', 'u.id')
   .then(posts => {
     res.json(posts);
