@@ -224,3 +224,7 @@ a:hover {
   bottom: 29px;
 }
 
+.bodyStyle{
+  background-color: #66CDAA;
+  opacity: 0.75;
+}
