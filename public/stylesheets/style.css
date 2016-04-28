@@ -187,8 +187,9 @@ label {
 
 .commentAuthor, .postAuthor {
   color: rgba(255,50,102,1);
-  font-size: 12px;
+  font-size: 15px;
   font-family: "Times New Roman", Georgia, Serif;
+  margin-left: 10px;
 }
 
 .icon {
