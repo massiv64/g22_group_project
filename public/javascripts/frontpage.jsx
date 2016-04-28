@@ -82,7 +82,7 @@ var Page = React.createClass({
                   title={v.title}
                   alias={v.alias}
                   body={v.body}
-                  post_id={v.post_id}
+                  post_id={v.id}
                   user_id={v.user_id}
                />
             </div>
