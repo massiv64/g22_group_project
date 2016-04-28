@@ -2,13 +2,70 @@ extends ../layout
 
 block content
   #cover
-  .col-sm-6.col-sm-offset-3.loginSignUpDiv
+    img(class="coverPhoto" src='/images/bug_photo.jpg')
+  .col-md-6.col-md-offset-3.loginSignUpDiv
     div
-      h2 About This App:
+      h2 Story About This App:
+      p(class="content")  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ex, unde! Voluptatibus sapiente quibusdam alias, veritatis, harum excepturi quis animi accusamus nisi laudantium repellat voluptas quia, possimus cumque sunt voluptates. 
+      p(class="content") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit voluptates quis. Ex itaque sunt nisi pariatur dolore. Beatae, dolorem, saepe. Officia reprehenderit aut laborum saepe, aperiam iste sunt explicabo.
       p(class="content") We developed this application in light of a need for tech students to have easy access to a comprehensive bug list.
-    h3 Login / Sign Up with Google:
+    h3(class="headline") Login / Sign Up with Google:
     div
       a(href="/auth/google")
-        i(class="fa fa-google fa-4x google" aria-hidden="true") &nbsp; Google
+        i(class="fa fa-google fa-3x google" aria-hidden="true") &nbsp; Google
+    div#button
+      i(class="fa fa-angle-double-down fa-3x" aria-hidden="true")
+  .container-fluid#secondCover
+    .row
+      h3(class="headline") Meet Our Team Members
+    .row
+      .col-sm-6.col-md-3
+        a(href="https://github.com/chrischang43")
+          img(class="headshot" src='/images/chris.jpg')
+          p(class="lead headline") Chris Chang
+      .col-sm-6.col-md-3
+        a(href="https://github.com/krpeacock")
+          img(class="headshot" src='/images/kyle.png')
+          p(class="lead headline") Kyle Peacock
+      .col-sm-6.col-md-3
+        a(href="https://github.com/massiv64")
+          img(class="headshot" src='/images/nic.jpg')
+          p(class="lead headline") Nic Higuera
+      .col-sm-6.col-md-3
+        a(href="https://github.com/sarabpj")
+          img(class="headshot" src='/images/sara.jpeg')
+          p(class="lead headline") Sara Jay
+  .container-fluid#thirdCover
+    .row
+      h3(class="headline") Technologies That We Used
+    .row
+      .col-sm-4.col-md-2
+        a(href="https://nodejs.org/")
+          img(class="logo" src='/images/nodejs.svg')
+          p(class="lead headline") NodeJS
+      .col-sm-4.col-md-2
+        a(href="http://passportjs.org")
+          img(class="logo" src='/images/passport.png')
+          p(class="lead headline") PassportJS
+      .col-sm-4.col-md-2
+        a(href="http://knexjs.org/")
+          img(class="logo" src='/images/knex.png')
+          p(class="lead headline") KnexJS
+      .col-sm-4.col-md-2
+        a(href="http://www.postgresql.org/")
+          img(class="logo" src='/images/postgresql.png')
+          p(class="lead headline") Postgresql
+      .col-sm-4.col-md-2
+        a(href="https://www.javascript.com/")
+          img(class="logo" src='/images/javascript.png')
+          p(class="lead headline") JavaScript
+      .col-sm-4.col-md-2
+        a(href="http://jade-lang.com/")
+          img(class="logo" src='/images/jade.png')
+          p(class="lead headline") Jade
+  script(src="/javascripts/landingPage.js")
+
+
+
 
 
