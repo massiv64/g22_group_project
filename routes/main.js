@@ -31,7 +31,7 @@ router.get('/posts', (req,res) => {
     }, []);
     res.format({
       'application/json':() => {
-        res.send(posts)
+        res.json(posts)
       }
     })
   }).catch(function(err){
@@ -41,12 +41,8 @@ router.get('/posts', (req,res) => {
 
 router.get('/categories', (req,res) => {
   knex('categories').then(categories => {
-    res.format({
-      'application/json':() => {
-        res.send(categories)
-      }
-    })
-  })
+        res.json(categories)
+      })
 })
 
 
