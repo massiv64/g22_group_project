@@ -10,7 +10,7 @@ block content
     h4 Email: #{user.email}
     h3 Posts by You: 
     each post in posts
-      #tile
+      .accountTile
           a(href="/users/#{post.user_id}/posts/#{post.id}")
             h3 #{post.title}
          
