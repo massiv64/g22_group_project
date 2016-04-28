@@ -6,13 +6,12 @@ block content
     thead
       th 
       th Name
-      th Show Posts
     tbody
       each user in users
         tr
           td 
             img.thumb(src="#{user.photo}")
-          td #{user.alias}
-          td
-            a(href="/users/#{user.id}/posts") Posts
+          td 
+            a(href="/users/#{user.id}/posts") #{user.alias}
+
     tfoot

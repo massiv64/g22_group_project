@@ -84,10 +84,21 @@ label {
 .inputGroup input {
   display:block;
   margin: 10px 0;
-  width: 250px;
+  width: 280px;
 }
 .categoryDropdown label, .categoryDropdown input {
   padding: 15px;
+}
+
+#aliasInput{
+  color: #999999;
+}
+
+#photoInput{
+  min-width: 280px;
+  max-width: 280px;
+  color: #999999;
+  max-height: 45px;
 }
 
 #reset{
@@ -223,4 +234,6 @@ a:hover {
   left: 180px;
   bottom: 29px;
 }
+
+
 
