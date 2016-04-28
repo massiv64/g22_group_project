@@ -29,17 +29,14 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    console.log(posts, "this is what post route is sending");
-    res.send(posts);
+    setTimeout(function() {
+      console.log(posts, "this is what post route is sending");
+      res.send(posts);
+    }, 5000);
   }).catch(function(err){
       res.render("error", {err})
   })
 })
-
-// knex('posts').then(posts =>{
-//   res.json(posts);
-// })
-// })
 
 router.get('/categories', (req,res) => {
   knex('categories').then(categories => {
