@@ -20,7 +20,7 @@ router.get('/posts', (req,res) => {
   .join('category_posts as cp', 'p.id', 'cp.post_id')
   .join('categories as c', 'cp.category_id', 'c.id')
   .then(posts => {
-    posts = posts.reduce((prev, next) => {
+    var postList = posts.reduce((prev, next) => {
       var post = prev.find(post => { return post.post_id === next.post_id} );
       if (post === undefined) {
         post = {post_id: next.post_id, alias: next.alias, user_id: next.user_id, title: next.title, body: next.body, categories: []}; 
@@ -29,10 +29,7 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    setTimeout(function() {
-      console.log(posts, "this is what post route is sending");
-      res.send(posts);
-    }, 5000);
+    res.send(postList);
   }).catch(function(err){
       res.render("error", {err})
   })
