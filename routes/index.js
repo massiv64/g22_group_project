@@ -10,6 +10,6 @@ module.exports = {
   comments,
   posts,
   users,
-	account,
+  account,
   auth
 }

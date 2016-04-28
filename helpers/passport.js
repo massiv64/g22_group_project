@@ -1,3 +1,4 @@
+'use strict'
 const passportLocal = require("passport-local");
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const knex = require("../db/knex");
@@ -18,7 +19,11 @@ module.exports = (passport) => {
   function(accessToken, refreshToken, profile, done){
     //is this email in the database?
     knex('users').where('email', profile._json.emails[0].value).first().then(user=> {
-      // eval(require("locus"))
+      let photoString = profile.photos[0].value;
+      let updatedPhoto = photoString.substring(0, photoString.length -6 )
+
+      eval(require("locus"))
+
       if(user){
         //does this person w/ a registered email have a Google token?
         knex('users').where('token', profile.id).first().then(foundUser => {
@@ -29,7 +34,7 @@ module.exports = (passport) => {
             knex('users').where('email', profile._json.emails[0].value).first().update({
               token: profile.id,
               alias: profile._json.displayName,
-              photo: profile.photos[0].value,
+              photo: updatedPhoto,
               is_verified: 1
             }).then(user => {
               return done(null, user)
@@ -43,7 +48,7 @@ module.exports = (passport) => {
           token: profile.id,
           alias: profile._json.displayName,
           email: profile._json.emails[0].value,
-          photo: profile.photos[0].value,
+          photo: updatedPhoto,
           is_verified: 0
         }, "*").then(user => {
           return done(null, user[0]);
