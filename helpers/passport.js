@@ -12,7 +12,7 @@ module.exports = (passport) => {
   passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/google/callback',
+      callbackURL: `${process.env.URL}/auth/google/callback`,
       scope: ['profile', 'email'],
       state: true
   },
@@ -56,12 +56,11 @@ module.exports = (passport) => {
     });
     }
   ));
-
   passport.use(new passportLocal.Strategy({
     usernameField: 'user[email]',
     passwordField: 'user[password]',
     passReqToCallback : true
-  },(req,email, password, done) =>{
+  },function(req, email, password, done){
       knex('users').where({ email }).first().then((user) =>{
         if (!user) {
           return done(null, false, req.flash('loginMessage','Incorrect username.'));
