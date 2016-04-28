@@ -236,4 +236,9 @@ a:hover {
 }
 
 
+.usersDiv{
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
 
