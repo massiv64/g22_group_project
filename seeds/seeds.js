@@ -13,6 +13,13 @@ exports.seed = function(knex, Promise) {
     knex('users').insert({id: 2002, photo: 'http://goo.gl/JUCPFY', email: 'calvin@abcglobal.edu', alias: 'Calvin'}),
     knex('categories').insert({technology: 'javascript'}),
     knex('categories').insert({technology: 'html'}),
-    knex('posts').insert({id: 1000,user_id: 2000, title: "Why I'm so down to Earth and likeable", body: "I don't really know, I just try to stay grounded and, like, keep it real even though I've had so much success!"})
+    knex('posts').insert({id: 1000,user_id: 2000, title: "Why I'm so down to Earth and likeable", body: "I don't really know, I just try to stay grounded and, like, keep it real even though I've had so much success!"}),
+    knex('categories').insert({technology: 'html'}),
+    knex('categories').insert({technology: 'css'}),
+    knex('categories').insert({technology: 'javascript'}),
+    knex('categories').insert({technology: 'react'}),
+    knex('categories').insert({technology: 'jQuery'}),
+    knex('categories').insert({technology: 'express'}),
+    knex('categories').insert({technology: 'jade'})
   );
 };
