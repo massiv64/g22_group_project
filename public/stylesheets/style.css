@@ -248,5 +248,8 @@ a:hover {
   margin-bottom: 5px;
   padding: 5px;
   }
-
+.usersDiv{
+  border: 2px solid black;
+  border-radius: 10px;
 }
+
