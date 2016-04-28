@@ -11,9 +11,10 @@ const passport = require('passport')
 const session  = require('cookie-session')
 const helpers = require('./helpers/authHelpers')
 
-if (app.get('env') === 'development' || 'test') {
+if (app.get('env') === 'development' || app.get('env') === 'test') {
   require('dotenv').load();
 }
+
 app.set("view engine", "jade");
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("tiny"))
@@ -69,9 +70,10 @@ app.use(function(err, req, res, next) {
 
 
 
+var port = process.env.PORT || 3000;
 
-app.listen(3000, function(){
-  console.log("Server is listening on port 3000");
+app.listen(port, function(){
+  console.log(`Server is listening on port ${port}`);
 });
 
 module.exports = app;

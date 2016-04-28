@@ -142,3 +142,19 @@ a:hover {
 .thumb {
   max-height:40px;
 }
+
+.dropdown {
+  float:right;
+  padding: 10px;
+  position: relative;
+  clear:all;
+}
+
+.caret {
+  margin: 10px;
+}
+
+.dropdown-menu {
+  padding:20px;
+  font-size:1.5em;
+}
