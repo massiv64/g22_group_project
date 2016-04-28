@@ -12,10 +12,6 @@ router.get('/login', function(req, res, next){
   res.render('auth/login');
 })
 
-router.get('/signup', authHelpers.preventLoginSignup, function(req, res, next){
-  res.render('auth/signup', {message: req.flash('loginMessage')});
-});
-
 router.get('/logout', (req,res) =>{
 
   req.logout();
@@ -25,7 +21,6 @@ router.get('/logout', (req,res) =>{
 router.get('/google',
   passport.authenticate('google'));
 
-
 router.get('/google/callback', passport.authenticate('google', {
 
   successRedirect: '/',
@@ -34,40 +29,13 @@ router.get('/google/callback', passport.authenticate('google', {
 }));
 
 
-//signing up
-router.post('/signup', authHelpers.preventLoginSignup, function(req, res, next) {
-  passwordHelpers.createUser(req).then((user) => {
-    passport.authenticate('local', function(err, user) {
-      if (err) { return next(err); }
-      if (!user) {
-        return res.redirect('/login');
-      }
-      req.logIn(user, function(err) {
-        if (err) {
-          return next(err);
-        }
-        return res.redirect('/');
-      });
-    })(req, res, next);
-  }).catch((err) =>{
-    if(err.constraint === 'users_username_unique'){
-      req.flash('loginMessage', 'username is already taken')
-      res.redirect('/auth/signup');
-    }
-    else if(err) {
-      req.flash('loginMessage', err.message)
-      res.redirect('/auth/signup');
-    }
-    res.render('error', {err})
 
-  })
+router.get('/success', (req, res) => {
+  if(req.user.is_verified === false){
+      res.redirect('/account/edit');
+      //the account PUT route will handle the logic to turn is_verified to TRUE
+  }
+  res.redirect('/')
 });
-
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/auth/login',
-  successFlash: true,
-  failureFlash: true
-}));
 
 module.exports = router

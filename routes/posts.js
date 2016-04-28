@@ -22,7 +22,7 @@ router.get('/', (req,res) => {
   });
 });
 
-router.get('/new', (req,res) => {
+router.get('/new', authHelpers.ensureCorrectUserForNewPost,(req,res) => {
   knex('users').where({id: req.params.user_id}).first().then((user) => {
     knex('categories').then(categories => {
       res.render("posts/new", {user, categories})
@@ -52,6 +52,7 @@ router.get('/:id', (req,res) => {
 router.get('/:id/edit', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   knex('posts').select("posts.id as post_id", "posts.title", "posts.body", "posts.user_id", "users.alias")
   .join("users", "posts.user_id","users.id")
+  .where('posts.id', req.params.id)
   .first()
   .then((post) => {
     res.render("posts/edit", {post})

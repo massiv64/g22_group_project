@@ -17,33 +17,47 @@ $( document ).ready(function() {
   })
 
 
-
   $('#accountUpdate').on('submit', function(e, verified){
-    if (validated){
-      e.preventDefault();
-      }
-      else if ($('#aliasInput')[0].value === ""){
-        setTimeout(function(){
-            $('#submit').click();
-            console.log('alias')
-        }, 50);
-        $('#aliasInput')[0].value = nameRecall;
 
-      }
-      else if ($('#photoInput')[0].value === ""){
-        setTimeout(function(){
-            $('#submit').click();
-            console.log('photo')
-        }, 50);
-        $('#photoInput')[0].value = photoRecall;
-      }
-      else {
-        validated = true;
-        setTimeout(function(){
-            $('#submit').click();
-            console.log('photo')
-        }, 50);
-    }
-  });
+
+
+
+
+    
+  })
+
+
+
+
+
+
+
+  // $('#accountUpdate').on('submit', function(e, verified){
+  //   if (validated){
+  //     e.preventDefault();
+  //     }
+  //     else if ($('#aliasInput')[0].value === ""){
+  //       setTimeout(function(){
+  //           $('#submit').click();
+  //           console.log('alias')
+  //       }, 50);
+  //       $('#aliasInput')[0].value = nameRecall;
+
+  //     }
+  //     else if ($('#photoInput')[0].value === ""){
+  //       setTimeout(function(){
+  //           $('#submit').click();
+  //           console.log('photo')
+  //       }, 50);
+  //       $('#photoInput')[0].value = photoRecall;
+  //     }
+  //     else {
+  //       validated = true;
+  //       setTimeout(function(){
+  //           $('#submit').click();
+  //           console.log('photo')
+  //       }, 50);
+  //   }
+  // });
 
 });

@@ -39,14 +39,19 @@ router.get('/:id/edit', authHelpers.ensureCorrectUserForEditComments, (req,res) 
 
 
 
-//old post route
+// Fixing this route, so user is bringing back to the post when a comment is added.
 router.post('/', (req,res) => {
-  knex.insert(req.body.comment, "*").into('comments').then((comment) =>{
-    knex('comments').where({id: comment[0].id}).update({post_id: req.params.post_id, user_id: req.session.passport.user,})
-      .then(function(){
-        res.redirect(`/posts/${req.params.post_id}/comments`)
-      })
-    });
+  var user_id = req.user.id;
+  var post_id = req.params.post_id;
+  var newComment = Object.assign(req.body.comment, {user_id}, {post_id})
+  knex('comments').insert(newComment).then(() =>{
+    knex('posts').join('users', 'posts.user_id', 'users.id')
+      .where('posts.id', post_id)
+      .first()
+      .then(user => {
+      res.redirect(`/users/${user.user_id}/posts/${post_id}`);  
+    })
+  });
 });
 
 
