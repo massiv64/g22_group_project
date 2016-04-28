@@ -36,7 +36,7 @@ router.get('/posts', (req,res) => {
 // })
 
 knex('posts').then(posts =>{
-  res.json('posts');
+  res.json(posts);
 })
 })
 
