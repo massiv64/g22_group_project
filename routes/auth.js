@@ -29,7 +29,7 @@ router.get('/google',
 router.get('/google/callback', passport.authenticate('google', {
 
   successRedirect: '/auth/success',
-  failureRedirect: '/signup',
+  failureRedirect: '/auth/signup',
 
 }));
 
@@ -38,7 +38,6 @@ router.get('/success', (req, res) => {
   if(req.user.is_verified === false){
       res.redirect('/account/edit');
       //the account PUT route will handle the logic to turn is_verified to TRUE
-
   }
   res.redirect('/')
 
@@ -48,32 +47,39 @@ router.get('/success', (req, res) => {
 
 
 //signing up
-router.post('/signup', (req, res) => {
+router.post('/signup', authHelpers.preventLoginSignup, function(req, res, next) {
   passwordHelpers.createUser(req).then((user) => {
-      req.login(user[0], (err) => {
+    passport.authenticate('local', function(err, user) {
+      if (err) { return next(err); }
+      if (!user) {
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
-        return res.redirect(`/`);
-      })
-    }).catch((err) =>{
-      if(err.constraint === 'users_email_unique'){
-        err.message = 'email is already taken'
-      }
-      if(err) {
-        req.flash('loginMessage', err.message)
-        res.redirect('/signup');
-      }
-      else {
-        res.render('error', {err})
-      }
-    })
-  });
+        return res.redirect('/');
+      });
+    })(req, res, next);
+  }).catch((err) =>{
+    if(err.constraint === 'users_username_unique'){
+      req.flash('loginMessage', 'username is already taken')
+      res.redirect('/auth/signup');
+    }
+    else if(err) {
+      req.flash('loginMessage', err.message)
+      res.redirect('/auth/signup');
+    }
+    res.render('error', {err})
 
-router.post('/login',
-  passport.authenticate('local', {
+  })
+});
+
+router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/auth/login'
+  failureRedirect: '/auth/login',
+  successFlash: true,
+  failureFlash: true
 }));
 
 module.exports = router

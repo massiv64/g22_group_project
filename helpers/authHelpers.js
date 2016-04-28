@@ -34,8 +34,7 @@ const authMiddleware  = {
   		res.redirect('/users/' +req.params.user_id + '/posts/' +req.params.id)
   	}
   },
-  ensureCorrectUserForEditComments(req,res,next){
-  	// eval(require('locus'))
+  ensureCorrectUserForEditComments(req,res,next) {
   	if (+req.params.id === req.session.passport.user){
   		return next()
   	} else {
