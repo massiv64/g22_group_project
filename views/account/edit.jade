@@ -8,9 +8,9 @@ block content
       img(id="photoDisplay", src="#{user.photo}" class="profilePhoto")
       .inputGroup
         h5 Name
-        input(id="aliasInput", type="text" name="user[alias]",  placeholder="#{user.alias}", autocomplete="off")
+        input(id="aliasInput", type="text" name="user[alias]",  value=user.alias, autocomplete="off")
         h5 Profile Photo
-        textarea(id="photoInput", type="text" name="user[photo]", placeholder="#{user.photo}",autocomplete="off")
+        textarea(id="photoInput", type="text" name="user[photo]", autocomplete="off") #{user.photo}
         input(type="submit" value="Submit" id="submit")
 
     button(id="reset") Reset Form
