@@ -3,7 +3,6 @@ extends ../layout
 block content
   .container
     h1(class="lead") See #{user.alias}'s posts
-    a(href="/users/#{user.id}/posts/new") #{user.alias}, Why don't you add a post here?
 
     each post in posts
       .panel.panel-default.panel-info
