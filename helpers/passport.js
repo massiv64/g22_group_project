@@ -56,27 +56,6 @@ module.exports = (passport) => {
     });
     }
   ));
-  passport.use(new passportLocal.Strategy({
-    usernameField: 'user[email]',
-    passwordField: 'user[password]',
-    passReqToCallback : true
-  },function(req, email, password, done){
-      knex('users').where({ email }).first().then((user) =>{
-        if (!user) {
-          return done(null, false, req.flash('loginMessage','Incorrect username.'));
-        }
-        if(!user.password){
-          return done(null, false, req.flash('loginMessage','You already has an account with Google'));
-        }
-        if (!passwordHelpers.comparePass(password, user.password)) {
-          return done(null, false, req.flash('loginMessage', 'Incorrect password.'));
-        }
-        return done(null, user);
-      }).catch((err) => {
-        return done(err)
-      })
-    }
-  ));
 
   passport.serializeUser((user, done) =>{
     done(null, user.id);
