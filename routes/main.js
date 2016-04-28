@@ -16,11 +16,10 @@ router.get("/", authHelpers.ensureAuthenticated, (req,res) => {
 router.get('/posts', (req,res) => {
   // Chris's code
   knex('posts as p').select('p.id as post_id', 'u.alias', 'p.user_id as user_id', 'p.title', 'p.body', 'cp.category_id', 'c.technology')
-  .join('users as u', 'p.user_id', 'u.id')
-  .join('category_posts as cp', 'p.id', 'cp.post_id')
-  .join('categories as c', 'cp.category_id', 'c.id')
+  .leftJoin('users as u', 'p.user_id', 'u.id')
+  .leftJoin('category_posts as cp', 'p.id', 'cp.post_id')
+  .leftJoin('categories as c', 'cp.category_id', 'c.id')
   .then(posts => {
-    console.log(posts, 'this is before reduce');
     posts = posts.reduce((prev, next) => {
       var post = prev.find(post => { return post.post_id === next.post_id} );
       if (post === undefined) {
@@ -30,7 +29,6 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    console.log(posts, 'this is after reduce')
     res.send(posts);
   }).catch(function(err){
       res.render("error", {err})
@@ -39,22 +37,9 @@ router.get('/posts', (req,res) => {
 
 router.get('/testing', (req,res) => {
   knex('posts as p').select('p.id as post_id', 'u.alias', 'p.user_id as user_id', 'p.title', 'p.body', 'cp.category_id', 'c.technology')
-  .leftOuterJoin('users as u', 'p.user_id', 'u.id')
-  .leftOuterJoin('category_posts as cp', 'p.id', 'cp.post_id')
-  .leftOuterJoin('categories as c', 'cp.category_id', 'c.id')
+  .join('users as u', 'p.user_id', 'u.id')
   .then(posts => {
-    console.log(posts, 'this is before reduce');
-    posts = posts.reduce((prev, next) => {
-      var post = prev.find(post => { return post.post_id === next.post_id} );
-      if (post === undefined) {
-        post = {post_id: next.post_id, alias: next.alias, user_id: next.user_id, title: next.title, body: next.body, categories: []}; 
-        prev.push(post);
-      }
-      post.categories.push({category_id: next.category_id, technology: next.technology});
-      return prev;
-    }, []);
-    console.log(posts, 'this is after reduce')
-    res.send(posts);
+    res.json(posts);
   }).catch(function(err){
       res.render("error", {err})
   })
