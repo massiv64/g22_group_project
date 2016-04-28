@@ -5,7 +5,4 @@ const expect = require('chai').expect;
 const knex = require('../db/knex');
 const app = require('../app');
 
-beforeEach(function() {
-  console.log("running a beforeEach!");
-});
 

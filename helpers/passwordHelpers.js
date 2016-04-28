@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const knex = require("../db/knex")
+const passportLocal = require("passport-local");
+const passport = require("./passport");
+
 
 const handleErrors = (req) => {
   return new Promise((resolve,reject) => {
@@ -28,7 +31,7 @@ exports.createUser = (req)=> {
       return knex('users').insert({
         email: req.body.user.email,
         password:hash,
-        is_verified: 0
+        is_verified: false
       }, "*")
     })
 },

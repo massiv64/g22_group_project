@@ -11,7 +11,7 @@ const passport = require('passport')
 const session  = require('cookie-session')
 const helpers = require('./helpers/authHelpers')
 
-if (app.get('env') === 'development') {
+if (app.get('env') === 'development' || app.get('env') === 'test') {
   require('dotenv').load();
 }
 
@@ -68,6 +68,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 
 var port = process.env.PORT || 3000;
