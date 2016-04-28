@@ -104,7 +104,7 @@ var Page = React.createClass({
 
 var Post = React.createClass({
 	render: function () {
-		return <div>
+		return <div className="wrapper">
          <a href={"/users/" + this.props.user_id + "/posts/" + this.props.post_id}>
             <h3>
             {this.props.title}
@@ -150,12 +150,20 @@ var MenuBox = React.createClass({
         </div>
       )
     })
-		return <div className="menu">
-      <a href="#top"> Scroll to the Top </a>
-      <br/>
-			<label> Search </label>
-      <input onKeyUp={this.props.searchFilter} type="text"/>
-      {listCategories}
+		return <div className="dropdown">
+      <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Filter <span className="caret"></span>
+      </button>
+        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+          <form class="form-horizontal" role="form">
+          <a href="#top"> Scroll to the Top </a>
+          <br/>
+          <div className="input-group">
+  			     <label> Search: </label>
+             <input onKeyUp={this.props.searchFilter} type="text"/>
+             {listCategories}
+          </div>
+          </form>
+      </div>
     </div>
 	}
 })
