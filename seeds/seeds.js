@@ -20,6 +20,6 @@ exports.seed = function(knex, Promise) {
     knex('categories').insert({id: 6, technology: 'express'}),
     knex('categories').insert({id: 7, technology: 'jade'}),
     knex('posts').insert({id: 1000,user_id: 2000, title: "Why I'm so down to Earth and likeable", body: "I don't really know, I just try to stay grounded and, like, keep it real even though I've had so much success!"}),
-    knex('category_posts').insert({id: 1, post_id: 1000, category_id: 1})
+    knex('category_posts').insert({id: 1, category_id: 1, post_id: 1000 })
   );
 };
