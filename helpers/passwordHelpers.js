@@ -31,7 +31,7 @@ exports.createUser = (req)=> {
       return knex('users').insert({
         email: req.body.user.email,
         password:hash,
-        is_verified: 0
+        is_verified: false
       }, "*")
     })
 },
