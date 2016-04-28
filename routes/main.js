@@ -29,11 +29,7 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    res.format({
-      'application/json':() => {
-        res.json(posts)
-      }
-    })
+      res.json(posts)
   }).catch(function(err){
       res.render("error", {err})
   })
