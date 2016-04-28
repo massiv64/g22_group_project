@@ -77,13 +77,13 @@ var Page = React.createClass({
             <p className="postAuthor">Posted By {this.state.post_author.alias}</p>
           </div>
           <h4 className="lead">Comments: {this.state.comments.length}</h4>
+          <CommentInput
+            post={this.state.post}
+            commentValue={this.commentValue}
+            value={this.state.text}
+          />
           {listComments}
         </div>
-        <CommentInput
-          post={this.state.post}
-          commentValue={this.commentValue}
-          value={this.state.text}
-        />
       </div>
     )
   }
@@ -124,6 +124,7 @@ var CommentInput = React.createClass({
           name="comment[content]"
           onChange={this.props.handleTextChange}
           value={this.props.value}
+          placeholder="Write a comment here!"
         />
         <input type="submit" value="Add this comment"/>
       </form>

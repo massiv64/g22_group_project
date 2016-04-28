@@ -39,7 +39,7 @@ router.get('/:id', (req,res) => {
     json: function(){
       knex('posts').where('id', req.params.id).first().then((post) =>{
         knex('users').where('id', post.user_id).first().then((post_author) => {
-          knex('comments').where('post_id', post.id).then((comments) => {
+          knex('comments').where('post_id', post.id).orderBy('id', 'desc').then((comments) => {
             knex('category_posts').where('post_id', post.id).then((category_relations) =>{
               knex('categories').where('id', category_relations.category_id).then((categories) =>{
                 post.body = markdown.toHTML(post.body);
