@@ -1,8 +1,3 @@
-.container {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .content {
   font-size: 18px;
 }
@@ -14,6 +9,13 @@ label {
 
 .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
   margin: 7px 0 0 0;
+}
+
+.errorCover {
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .coverPhoto {
@@ -33,9 +35,19 @@ label {
   color: black;
 }
 
+.errorDiv {
+  border: 5px solid rgba(100,100,100,0.5);
+  position: absolute;
+  border-radius: 10px;
+  padding: 20px;
+  top: 40vh;
+  background-color: rgba(150,100,255,0.5);
+  color: black;
+}
+
 .headshot {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 25px;
   margin-left: 20%;
   margin-right: 15%;
@@ -47,6 +59,13 @@ label {
   border-radius: 25px;
   margin-left: 20%;
   margin-right: 15%;
+}
+
+.github {
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
+  margin-left: 18vw;
 }
 
 .headline {
@@ -61,6 +80,11 @@ label {
 
 #thirdCover {
   margin-top: 10vh;
+  background-color: rgba(150,150,0,0.3);
+}
+
+#fourthCover {
+  margin-top: 10vh;
   background-color: rgba(118,200,0,0.3);
 }
 
@@ -68,8 +92,9 @@ label {
   border-top: 2px;
   border-color: gray;
   border-style: solid;
+  border-radius: 20px;
   margin-bottom: 5px;
-  padding: 5px;
+  padding-left: 5vw;
   width: 75vw;
 }
 
@@ -191,13 +216,15 @@ a:hover {
 
 .profilePhoto {
   max-height: 200px;
+  margin-bottom: 10px;
 }
 
 .profileDiv {
   width: 60%;
   border: 2px solid black;
   padding: 10px;
-
+  border-radius: 5px;
+  padding-left: 2vw;
 }
 
 .thumb {
@@ -205,10 +232,10 @@ a:hover {
 }
 
 .dropdown {
-  float:right;
-  padding: 10px;
-  position: relative;
-  clear:all;
+  float: right;
+  position: fixed;
+  left: 75vw;
+  top: 15vh;
 }
 
 .caret {
@@ -235,21 +262,24 @@ a:hover {
   bottom: 29px;
 }
 
+.CodeMirror, .CodeMirror-scroll {
+  max-height: 100px;
+}
 
 .bodyStyle{
   background-color: #66CDAA;
 }
 
-#tile{
+.accountTile {
   width: 95%;
   border-top: 2px;
   border-color: gray;
   border-style: solid;
+  border-radius: 15px;
   margin-bottom: 5px;
-  padding: 5px;
+  padding-left: 3vw;
   }
 .usersDiv{
   border: 2px solid black;
   border-radius: 10px;
 }
-

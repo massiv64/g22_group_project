@@ -82,16 +82,16 @@ var Page = React.createClass({
                   title={v.title}
                   alias={v.alias}
                   body={v.body}
-                  post_id={v.id}
+                  post_id={v.post_id}
                   user_id={v.user_id}
                />
             </div>
           )
       });
       return (
-      <div>
-         <h2>Welcome to Bug Hub!</h2>
-          <MenuBox
+      <div className="container">
+         <h2>Welcome to the Stack App</h2>
+         <MenuBox
             searchFilter={this.searchFilter}
             categoryFilter={this.categoryFilter}
             categories={this.state.categories}
