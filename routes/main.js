@@ -23,7 +23,7 @@ router.get('/posts', (req,res) => {
 //     posts = posts.reduce((prev, next) => {
 //       var post = prev.find(post => { return post.post_id === next.post_id} );
 //       if (post === undefined) {
-//         post = {post_id: next.post_id, alias: next.alias, user_id: next.user_id, title: next.title, body: next.body, categories: []}; 
+//         post = {post_id: next.post_id, alias: next.alias, user_id: next.user_id, title: next.title, body: next.body, categories: []};
 //         prev.push(post);
 //       }
 //       post.categories.push({category_id: next.category_id, technology: next.technology});
@@ -35,7 +35,7 @@ router.get('/posts', (req,res) => {
 //   })
 // })
 
-knex('posts').then(posts =>{
+knex('posts').orderBy('id', 'asc').then(posts =>{
   res.json(posts);
 })
 })
