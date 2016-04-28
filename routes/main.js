@@ -29,7 +29,8 @@ router.get('/posts', (req,res) => {
       post.categories.push({category_id: next.category_id, technology: next.technology});
       return prev;
     }, []);
-    res.send(posts)
+    console.log(posts, "this is what post route is sending");
+    res.send(posts);
   }).catch(function(err){
       res.render("error", {err})
   })
