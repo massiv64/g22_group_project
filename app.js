@@ -38,6 +38,10 @@ app.use('/account', routes.account);
 app.use('/users/:user_id/posts', routes.posts);
 app.use('/posts/:post_id/comments', routes.comments);
 
+app.get('*', (req, res) => {
+  res.render('errorPage')
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

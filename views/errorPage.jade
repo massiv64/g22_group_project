@@ -1,0 +1,9 @@
+extends ./layout
+
+block content
+  #Cover
+    img(class="errorCover" src='/images/bug_error.jpg')
+  .col-md-6.col-md-offset-3.errorDiv
+    p(class="lead headline") I am sorry, this page is not found. Please click the link below to go back to Home Page!
+    a(href="/")
+      h1.headline To Home Page
