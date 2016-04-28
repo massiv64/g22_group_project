@@ -92,5 +92,4 @@ router.delete('/:id', authHelpers.ensureCorrectUserForEdit, (req,res) => {
   });
 });
 
-
 module.exports = router

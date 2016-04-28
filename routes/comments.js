@@ -4,7 +4,6 @@ const knex = require("../db/knex")
 const markdown = require('markdown').markdown;
 const authHelpers = require('../helpers/authHelpers')
 
-
 router.get('/', (req,res) => {
   knex('comments').where({post_id: req.params.post_id}).then((comments) =>{
     knex('posts').where({id: req.params.post_id}).first().then((post) => {
@@ -33,11 +32,8 @@ router.get('/:id', (req,res) => {
 });
 
 router.get('/:id/edit', authHelpers.ensureCorrectUserForEditComments, (req,res) => {
-        res.render("comments/edit")
-
+  res.render("comments/edit")
 });
-
-
 
 // Fixing this route, so user is bringing back to the post when a comment is added.
 router.post('/', (req,res) => {

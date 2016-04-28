@@ -34,8 +34,8 @@ label {
 }
 
 .headshot {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 25px;
   margin-left: 20%;
   margin-right: 15%;
@@ -49,6 +49,13 @@ label {
   margin-right: 15%;
 }
 
+.github {
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
+  margin-left: 18vw;
+}
+
 .headline {
   text-align: center;
   margin-bottom: 2.7vh;
@@ -60,6 +67,11 @@ label {
 }
 
 #thirdCover {
+  margin-top: 10vh;
+  background-color: rgba(150,150,0,0.3);
+}
+
+#fourthCover {
   margin-top: 10vh;
   background-color: rgba(118,200,0,0.3);
 }
