@@ -5,10 +5,10 @@ block content
     img(class="coverPhoto" src='/images/bug_photo.jpg')
   .col-md-6.col-md-offset-3.loginSignUpDiv
     div
-      h2 Story About This App:
-      p(class="content")  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ex, unde! Voluptatibus sapiente quibusdam alias, veritatis, harum excepturi quis animi accusamus nisi laudantium repellat voluptas quia, possimus cumque sunt voluptates. 
-      p(class="content") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit voluptates quis. Ex itaque sunt nisi pariatur dolore. Beatae, dolorem, saepe. Officia reprehenderit aut laborum saepe, aperiam iste sunt explicabo.
+      h2.text-center About This App
+      p(class="content") As programmers, we often need to debug our code.  Often time, we need to debug code that other people have already solved.  Instead of reinventing the wheel, we want to create a platform where tech students are able to log their bugs and share with others.
       p(class="content") We developed this application in light of a need for tech students to have easy access to a comprehensive bug list.
+      p(class="content") We hope other students will use our error tracking app to help themselves as well as help others in their journey to debugging.
     h3(class="headline") Login / Sign Up with Google:
     div
       a(href="/auth/google")
@@ -63,6 +63,14 @@ block content
         a(href="http://jade-lang.com/")
           img(class="logo" src='/images/jade.png')
           p(class="lead headline") Jade
+  .container-fluid#fourthCover
+    .row
+      h3(class="headline") Open Source Project
+      p(class="lead headline") If you would like to contribute, please checkout our code here!
+      .col-md-6.col-md-offset-3
+        a(href="https://github.com/chrischang43/g22_group_project")
+          img(class="github" src='/images/github.svg')
+          p(class="lead text-center") GitHub - Bug Hub
   script(src="/javascripts/landingPage.js")
 
 

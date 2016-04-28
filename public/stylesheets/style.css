@@ -1,8 +1,3 @@
-.container {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .content {
   font-size: 18px;
 }
@@ -34,8 +29,8 @@ label {
 }
 
 .headshot {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 25px;
   margin-left: 20%;
   margin-right: 15%;
@@ -47,6 +42,13 @@ label {
   border-radius: 25px;
   margin-left: 20%;
   margin-right: 15%;
+}
+
+.github {
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
+  margin-left: 18vw;
 }
 
 .headline {
@@ -61,6 +63,11 @@ label {
 
 #thirdCover {
   margin-top: 10vh;
+  background-color: rgba(150,150,0,0.3);
+}
+
+#fourthCover {
+  margin-top: 10vh;
   background-color: rgba(118,200,0,0.3);
 }
 
@@ -68,8 +75,9 @@ label {
   border-top: 2px;
   border-color: gray;
   border-style: solid;
+  border-radius: 20px;
   margin-bottom: 5px;
-  padding: 5px;
+  padding-left: 5vw;
   width: 75vw;
 }
 
@@ -84,10 +92,21 @@ label {
 .inputGroup input {
   display:block;
   margin: 10px 0;
-  width: 250px;
+  width: 280px;
 }
 .categoryDropdown label, .categoryDropdown input {
   padding: 15px;
+}
+
+#aliasInput{
+  color: #999999;
+}
+
+#photoInput{
+  min-width: 280px;
+  max-width: 280px;
+  color: #999999;
+  max-height: 45px;
 }
 
 #reset{
@@ -180,13 +199,15 @@ a:hover {
 
 .profilePhoto {
   max-height: 200px;
+  margin-bottom: 10px;
 }
 
 .profileDiv {
-  width: 100%;
+  width: 60%;
   border: 2px solid black;
   padding: 10px;
-
+  border-radius: 5px;
+  padding-left: 2vw;
 }
 
 .thumb {
@@ -194,10 +215,10 @@ a:hover {
 }
 
 .dropdown {
-  float:right;
-  padding: 10px;
-  position: relative;
-  clear:all;
+  float: right;
+  position: fixed;
+  left: 75vw;
+  top: 15vh;
 }
 
 .caret {
@@ -226,4 +247,22 @@ a:hover {
 
 .CodeMirror, .CodeMirror-scroll {
   max-height: 100px;
+}
+
+.bodyStyle{
+  background-color: #66CDAA;
+}
+
+.accountTile {
+  width: 95%;
+  border-top: 2px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  padding-left: 3vw;
+  }
+.usersDiv{
+  border: 2px solid black;
+  border-radius: 10px;
 }

@@ -32,8 +32,7 @@ module.exports = (passport) => {
             knex('users').where('email', profile._json.emails[0].value).first().update({
               token: profile.id,
               alias: profile._json.displayName,
-              photo: updatedPhoto,
-              is_verified: 1
+              photo: updatedPhoto
             }).then(user => {
               return done(null, user)
             })
@@ -46,8 +45,7 @@ module.exports = (passport) => {
           token: profile.id,
           alias: profile._json.displayName,
           email: profile._json.emails[0].value,
-          photo: updatedPhoto,
-          is_verified: 0
+          photo: updatedPhoto
         }, "*").then(user => {
           return done(null, user[0]);
         });
@@ -55,27 +53,6 @@ module.exports = (passport) => {
     }).catch(err => {
       return done(err,null);
     });
-    }
-  ));
-  passport.use(new passportLocal.Strategy({
-    usernameField: 'user[email]',
-    passwordField: 'user[password]',
-    passReqToCallback : true
-  },function(req, email, password, done){
-      knex('users').where({ email }).first().then((user) =>{
-        if (!user) {
-          return done(null, false, req.flash('loginMessage','Incorrect username.'));
-        }
-        if(!user.password){
-          return done(null, false, req.flash('loginMessage','You already has an account with Google'));
-        }
-        if (!passwordHelpers.comparePass(password, user.password)) {
-          return done(null, false, req.flash('loginMessage', 'Incorrect password.'));
-        }
-        return done(null, user);
-      }).catch((err) => {
-        return done(err)
-      })
     }
   ));
 
