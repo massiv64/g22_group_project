@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const knex = require("../db/knex")
+const passportLocal = require("passport-local");
+const passport = require("./passport");
+
 
 const handleErrors = (req) => {
   return new Promise((resolve,reject) => {
