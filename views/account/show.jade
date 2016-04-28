@@ -2,7 +2,7 @@ extends ../layout.jade
 
 block content
   .col-sm-6.col-sm-offset-2.profileDiv
-    h1(class=)=user.alias
+    h1=user.alias
     if (!user.photo)
       img.profilePhoto(src="http://memesvault.com/wp-content/uploads/Derp-Face-Meme-Smiley-191.jpg") 
     else
