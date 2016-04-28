@@ -28,6 +28,15 @@ const authMiddleware  = {
   		res.redirect('/users/' +req.params.user_id + '/posts/' +req.params.id)
   	}
   },
+
+  ensureCorrectUserForNewPost(req,res,next){
+    if (+req.params.user_id === req.user.id){
+
+      return next()
+    } else {
+      res.redirect('/users/' +req.params.user_id + '/posts/')
+    }
+  },
   ensureCorrectUserForEditComments(req,res,next){
     var post_id = req.params.post_id
 

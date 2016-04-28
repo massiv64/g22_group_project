@@ -8,11 +8,11 @@ block content
       img(id="photoDisplay", src="#{user.photo}" class="profilePhoto")
       .inputGroup
         h5 Name
-        input(id="aliasInput", type="text" name="user[alias]",  placeholder="What should we call you?" autocomplete="off")
+        input(id="aliasInput", type="text" name="user[alias]",  value=user.alias, autocomplete="off")
         h5 Profile Photo
-        input(id="photoInput", type="text" name="user[photo]", placeholder="Link to a photo" autocomplete="off")
+        textarea(id="photoInput", type="text" name="user[photo]", autocomplete="off") #{user.photo}
         input(type="submit" value="Submit" id="submit")
-          
+
     button(id="reset") Reset Form
     h4 Delete your account
     form(action="/users/#{user.id}?_method=DELETE" method="POST" id="deleteAccount")

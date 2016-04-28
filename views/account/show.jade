@@ -1,18 +1,17 @@
 extends ../layout.jade
 
 block content
-  .col-sm-6.profileDiv
-    h1(class="lead")=user.alias
+  .col-sm-6.col-sm-offset-2.profileDiv
+    h1(class=)=user.alias
     if (!user.photo)
       img.profilePhoto(src="http://memesvault.com/wp-content/uploads/Derp-Face-Meme-Smiley-191.jpg") 
     else
       img.profilePhoto(src="#{user.photo}")
     h4 Email: #{user.email}
-    a(href="/account/edit") Edit Your Account
     h3 Posts by You: 
     each post in posts
-      .tile
+      #tile
           a(href="/users/#{post.user_id}/posts/#{post.id}")
             h3 #{post.title}
-          
+         
 

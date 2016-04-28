@@ -32,8 +32,7 @@ module.exports = (passport) => {
             knex('users').where('email', profile._json.emails[0].value).first().update({
               token: profile.id,
               alias: profile._json.displayName,
-              photo: updatedPhoto,
-              is_verified: 1
+              photo: updatedPhoto
             }).then(user => {
               return done(null, user)
             })
@@ -46,8 +45,7 @@ module.exports = (passport) => {
           token: profile.id,
           alias: profile._json.displayName,
           email: profile._json.emails[0].value,
-          photo: updatedPhoto,
-          is_verified: 0
+          photo: updatedPhoto
         }, "*").then(user => {
           return done(null, user[0]);
         });

@@ -23,10 +23,12 @@ router.get('/google',
 
 router.get('/google/callback', passport.authenticate('google', {
 
-  successRedirect: '/auth/success',
+  successRedirect: '/',
   failureRedirect: '/auth/signup',
 
 }));
+
+
 
 router.get('/success', (req, res) => {
   if(req.user.is_verified === false){
