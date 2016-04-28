@@ -16,10 +16,9 @@ label {
   margin: 7px 0 0 0;
 }
 
-#cover {
+.coverPhoto {
   width: 100vw;
   height: 100vh;
-  background: url("https://mindandlifematters.files.wordpress.com/2015/08/self-improvement-books.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -29,9 +28,40 @@ label {
   position: absolute;
   border-radius: 10px;
   padding: 20px;
-  top: 25vh;
+  top: 10vh;
   background-color: rgba(150,255,255,0.5);
   color: black;
+}
+
+.headshot {
+  width: 200px;
+  height: 200px;
+  border-radius: 25px;
+  margin-left: 20%;
+  margin-right: 15%;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
+  margin-left: 20%;
+  margin-right: 15%;
+}
+
+.headline {
+  text-align: center;
+  margin-bottom: 2.7vh;
+}
+
+#secondCover {
+  margin-top: 10vh;
+  background-color: rgba(118,183,0,0.6);
+}
+
+#thirdCover {
+  margin-top: 10vh;
+  background-color: rgba(118,200,0,0.3);
 }
 
 .tile {
@@ -74,6 +104,13 @@ label {
 
 .google {
   color: red;
+  margin: 0 15% 0 30%;
+}
+
+#button {
+  position: absolute;
+  top: 80vh;
+  left: 45%;
 }
 
 .google:hover {
