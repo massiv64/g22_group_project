@@ -1,18 +1,18 @@
 extends ../layout
 
 block content
-  h1 See all the users
-  table(class="table table-striped table-hover")
-    thead
-      th 
-      th Name
-      th Show Posts
-    tbody
-      each user in users
-        tr
-          td 
-            img.thumb(src="#{user.photo}")
-          td #{user.alias}
-          td
-            a(href="/users/#{user.id}/posts") Posts
-    tfoot
+  .col-sm-6.col-sm-offset-3.usersDiv
+    h1 Bug Hub Users
+    table(class="table table-striped table-hover")
+      thead
+        th Name
+        th 
+      tbody
+        each user in users
+          tr
+            td 
+              a(href="/users/#{user.id}/posts") #{user.alias}
+            td 
+              img.thumb(src="#{user.photo}")
+
+      tfoot

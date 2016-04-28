@@ -25,7 +25,7 @@ var Page = React.createClass({
      var filtered;
       $.getJSON("/posts").then((function (posts) {
        filtered = posts.filter(function(val, index){
-         return val.title.toLowerCase().indexOf(search) > -1;
+         return val.title.toLowerCase().indexOf(Search) > -1;
        })
        this.setState({posts: filtered})
       }.bind(this))

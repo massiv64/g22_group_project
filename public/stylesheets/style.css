@@ -96,10 +96,21 @@ label {
 .inputGroup input {
   display:block;
   margin: 10px 0;
-  width: 250px;
+  width: 280px;
 }
 .categoryDropdown label, .categoryDropdown input {
   padding: 15px;
+}
+
+#aliasInput{
+  color: #999999;
+}
+
+#photoInput{
+  min-width: 280px;
+  max-width: 280px;
+  color: #999999;
+  max-height: 45px;
 }
 
 #reset{
@@ -195,7 +206,7 @@ a:hover {
 }
 
 .profileDiv {
-  width: 100%;
+  width: 60%;
   border: 2px solid black;
   padding: 10px;
 
@@ -234,5 +245,23 @@ a:hover {
   position: relative;
   left: 180px;
   bottom: 29px;
+}
+
+
+.bodyStyle{
+  background-color: #66CDAA;
+}
+
+#tile{
+  width: 95%;
+  border-top: 2px;
+  border-color: gray;
+  border-style: solid;
+  margin-bottom: 5px;
+  padding: 5px;
+  }
+.usersDiv{
+  border: 2px solid black;
+  border-radius: 10px;
 }
 

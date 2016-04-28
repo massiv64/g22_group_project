@@ -22,7 +22,7 @@ router.get('/', (req,res) => {
   });
 });
 
-router.get('/new', (req,res) => {
+router.get('/new', authHelpers.ensureCorrectUserForNewPost,(req,res) => {
   knex('users').where({id: req.params.user_id}).first().then((user) => {
     knex('categories').then(categories => {
       res.render("posts/new", {user, categories})
