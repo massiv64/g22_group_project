@@ -30,8 +30,15 @@ router.get('/edit', function(req, res){
 
 
 
-router.put('/', passwordHelpers.editUser, (req,res) => {
-      res.redirect('/account')
+router.put('/', (req,res) => {
+  knex('users').where({id: req.user.id}).first().update({
+        alias: req.body.user.alias,
+        photo: req.body.user.photo,
+      }).then(function(){
+        res.redirect('/account')
+        
+      })
+
 });
 
 module.exports = router;
