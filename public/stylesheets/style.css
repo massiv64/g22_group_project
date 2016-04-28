@@ -236,9 +236,20 @@ a:hover {
 }
 
 
+.bodyStyle{
+  background-color: #66CDAA;
+}
+
+#tile{
+  width: 95%;
+  border-top: 2px;
+  border-color: gray;
+  border-style: solid;
+  margin-bottom: 5px;
+  padding: 5px;
+  }
 .usersDiv{
   border: 2px solid black;
   border-radius: 10px;
 }
-
 
