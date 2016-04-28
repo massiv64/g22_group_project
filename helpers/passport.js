@@ -56,12 +56,11 @@ module.exports = (passport) => {
     });
     }
   ));
-
   passport.use(new passportLocal.Strategy({
     usernameField: 'user[email]',
     passwordField: 'user[password]',
     passReqToCallback : true
-  },(req,email, password, done) =>{
+  },function(req, email, password, done){
       knex('users').where({ email }).first().then((user) =>{
         if (!user) {
           return done(null, false, req.flash('loginMessage','Incorrect username.'));
