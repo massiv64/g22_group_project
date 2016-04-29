@@ -31,8 +31,21 @@ router.get('/:id', (req,res) => {
   });
 });
 
-router.get('/:id/edit', authHelpers.ensureCorrectUserForEditComments, (req,res) => {
-  res.render("comments/edit")
+router.get('/:id/edit', (req,res) => {
+  // eval(require('locus')
+  var post_id = req.params.post_id
+
+    knex('comments').where({id: req.params.id}).first().then((comment) =>{
+      knex('posts').where({id: comment.post_id}).first().then((post) => {
+        if(comment.user_id === req.user.id){
+            res.render("comments/edit", {comment,post})
+             
+      }else{
+        res.redirect('/posts/' + req.params.post_id )
+      }
+      })
+    })
+
 });
 
 // Fixing this route, so user is bringing back to the post when a comment is added.
@@ -52,8 +65,14 @@ router.post('/', (req,res) => {
 
 
 router.patch('/:id', (req,res) => {
-  knex('comments').where({id:req.params.id}).update(req.body.comment).then(() =>{
-    res.redirect(`/posts/${req.params.post_id}/comments`)
+  knex('comments').where({id:req.params.id}).update(req.body.comment)
+  .then(() =>{
+    knex('posts')
+    .select('posts.id as pid', 'users.id as uid')
+    .join('users', 'posts.user_id', 'users.id')
+    .where('posts.id', req.params.post_id).first().then( (post)=> {
+    res.redirect('/users/'+  post.uid + '/posts/' + post.pid)
+    })
   }).catch((err) =>{
     res.render("error", {err})
   });
@@ -61,7 +80,7 @@ router.patch('/:id', (req,res) => {
 
 router.delete('/:id',authHelpers.ensureCorrectUserForEditComments, (req,res) => {
   knex('comments').where({id:req.params.id}).returning("*").first().del().then((post) =>{
-    res.redirect(`/posts/${req.params.post_id}/comments`)
+    res.redirect(`/posts/${req.params.post_id}`)
   }).catch((err) =>{
     res.render("error", {err})
   });
