@@ -56,6 +56,8 @@ var Page = React.createClass({
                 alias={v.alias}
                 commentContent={v.content}
                 user_id={v.user_id}
+                post_id={v.post_id}
+                comment_id={v.id}
              />
           </div>
         )
@@ -107,6 +109,7 @@ var Comment = React.createClass({
           <a href={"/users/" + this.props.user_id + "/posts"}>
             <p className='commentAuthor'>Commented by: {this.props.alias} </p>
           </a>
+<a href={'/posts/' +this.props.post_id +'/comments/' + this.props.comment_id +'/edit'}>Edit Comment</a>
         </div>
     )
   }
