@@ -39,15 +39,11 @@ var Page = React.createClass({
       }
     });
   },
-  handleTextChange: function handleTextChange(e){
-    debugger;
-  },
   handleSubmit: function handleSubmit(e){
     e.preventDefault();
     var user_id = this.state.user.id;
     var post_id = this.state.post.id;
     var content = this.state.editorValue;
-    debugger
   },
   render: function(){
     var body = this.state.post.body;
@@ -55,8 +51,13 @@ var Page = React.createClass({
     var listComments = this.state.comments.map(function (v, i) {
        return (
           <div className="commentDiv" key={i}>
+             <img className="icon" src={v.photo}/>
              <Comment
+                alias={v.alias}
                 commentContent={v.content}
+                user_id={v.user_id}
+                post_id={v.post_id}
+                comment_id={v.id}
              />
           </div>
         )
@@ -73,8 +74,9 @@ var Page = React.createClass({
                 dangerouslySetInnerHTML={createMarkup()}
               >
               </div>
+              <p className="postAuthor">Posted By {this.state.post_author.alias}</p>
             </div>
-            <p className="postAuthor">Posted By {this.state.post_author.alias}</p>
+            
           </div>
           <h4 className="lead">Comments: {this.state.comments.length}</h4>
           <CommentInput
@@ -104,7 +106,10 @@ var Comment = React.createClass({
         >
 
         </div>
-          <p className='commentAuthor'>Commented by: </p>
+          <a href={"/users/" + this.props.user_id + "/posts"}>
+            <p className='commentAuthor'>Commented by: {this.props.alias} </p>
+          </a>
+<a href={'/posts/' +this.props.post_id +'/comments/' + this.props.comment_id +'/edit'}>Edit Comment</a>
         </div>
     )
   }
@@ -126,7 +131,7 @@ var CommentInput = React.createClass({
           value={this.props.value}
           placeholder="Write a comment here!"
         />
-        <input type="submit" value="Add this comment"/>
+        <input className="btn btn-primary" type="submit" value="Add this comment"/>
       </form>
       </div>
     )
