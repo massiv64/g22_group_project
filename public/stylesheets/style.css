@@ -128,7 +128,7 @@ label {
 
 #reset{
   position:relative;
-  bottom: 45px;
+  bottom: 50px;
   left: 110px;
   width: 100px;
 }
@@ -223,6 +223,7 @@ a:hover {
 .profileDiv {
   width: 60%;
   border: 2px solid black;
+  border-radius: 10px;
   padding: 10px;
   border-radius: 5px;
   padding-left: 2vw;
