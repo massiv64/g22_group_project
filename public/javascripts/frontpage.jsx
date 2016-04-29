@@ -5,6 +5,7 @@ var Page = React.createClass({
 
    getInitialState: function getInitialState() {
       return {
+         allPosts: [],
          posts: [],
          categories: [],
          filters: [],
@@ -33,39 +34,50 @@ var Page = React.createClass({
    },
    // Filters posts by selected categories
    categoryFilter: function categoryFilter(e){
-     var category = e.target.value;
-     var idx = this.state.filters.indexOf(category);
-     var filtered = [];
-     if(e.target.checked){
-       if(idx < 0){
-        this.state.filters.push(category)
-       }
-     }
-     else{
-       if(idx > -1){
-         this.state.filters.splice(idx, 1);
-       }
-     }
-     $.getJSON('/posts').then((function(posts){
-       var filtered = posts;
-       this.state.posts.forEach(function (val, index){
-         for(var i=0;i<this.state.filters.length;i++){
-           if (this.state.filters[i] === val){
-             filtered.push(val);
-           }
-           if (this.state.filters[i] !== val){
-             filtered.splice(filtered.indexOf(val), 1);
-           }
-         }
-       }.bind(this))
+    var value = e.target.value;
+    var filters=this.state.filters;
+    var filtered;
+    if (e.target.checked){
+      filters.push(value);
+    }
+    else {
+      filters.splice(filters.indexOf(value), 1);
+    }
+
+    if (filters){
+      $.getJSON("/posts").then((function (posts) {
+        filters.forEach(function(val, index){
+          filtered = posts.filter(function(post, pidx){
+            var number = 0;
+            post.categories.forEach(function(category, cidx){
+               if (category.technology === value){
+                 number ++;
+               }
+            });
+            return number > 0;
+          })
+          console.log(filtered)
+        })
+
         this.setState({posts: filtered})
-     }.bind(this))
-     );
+      }.bind(this))
+      );
+
+    }
+    else{
+
+        this.setState({
+          posts: this.state.allPosts,
+        })
+
+    }
    },
+
    componentWillMount: function componentWillMount() {
       $.getJSON("/posts").then((function (posts) {
          this.setState({
-            posts: posts
+            posts: posts,
+            allPosts: posts,
          });
       }).bind(this));
       $.getJSON('/categories').then((function(categories) {
@@ -75,6 +87,7 @@ var Page = React.createClass({
       }).bind(this));
    },
    render: function () {
+     if(this.state.posts){
       var listPosts = this.state.posts.map(function (v, i) {
          return (
             <div className="tile" key={i}>
@@ -87,7 +100,22 @@ var Page = React.createClass({
                />
             </div>
           )
-      });
+      });}
+      else {
+        var listPosts = this.state.allPosts.map(function (v, i) {
+           return (
+              <div className="tile" key={i}>
+                 <Post
+                    title={v.title}
+                    alias={v.alias}
+                    body={v.body}
+                    post_id={v.post_id}
+                    user_id={v.user_id}
+                 />
+              </div>
+            )
+        });
+      }
       return (
       <div className="container">
          <h2>Welcome to the Stack App</h2>
